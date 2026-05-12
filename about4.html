@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | OWL 4 U</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--cream:#f5f1ea;--cream2:#ece6da;--dark:#1a1710;--br:#7a6248;--br2:#a88860;--muted:#6a6055;--line:rgba(26,23,16,.1);--FB:'Cormorant Garamond',serif;--FJ:'Noto Serif JP',serif;--FU:'Inter',sans-serif;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--dark);color:var(--cream);font-family:var(--FJ);font-weight:300;overflow-x:hidden;}
+    a{color:inherit;text-decoration:none;}
+    section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
+
+    .hbg{position:fixed;top:1.5rem;left:1.8rem;z-index:400;display:flex;flex-direction:column;gap:6px;cursor:pointer;padding:10px;background:rgba(26,23,16,.7);backdrop-filter:blur(8px);border:1px solid rgba(245,241,234,.1);}
+    .hbg span{display:block;width:22px;height:1px;background:var(--cream);transition:.3s;}
+    .hbg.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .hbg.open span:nth-child(2){opacity:0;}
+    .hbg.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .full-nav{display:none;position:fixed;inset:0;z-index:350;background:rgba(26,23,16,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);flex-direction:column;align-items:flex-start;justify-content:center;padding:8vw;}
+    .full-nav.open{display:flex;}
+    .full-nav-logo{margin-bottom:2.5rem;display:inline-block;background:rgba(236,230,218,.92);padding:6px 12px;}
+    .full-nav-logo img{display:block;width:110px;}
+    .full-nav a{font-family:var(--FB);font-size:clamp(1.25rem,2.4vw,1.9rem);font-weight:300;letter-spacing:.04em;color:rgba(245,241,234,.38);line-height:1.2;transition:color .2s,transform .2s;display:flex;align-items:baseline;gap:1.2rem;padding:.55rem 0;border-bottom:1px solid rgba(245,241,234,.05);}
+    .full-nav a:hover,.full-nav a.cur{color:var(--cream);transform:translateX(.8rem);}
+    .fnav-sub{font-family:var(--FJ);font-size:.6rem;font-weight:200;letter-spacing:.1em;color:rgba(245,241,234,.16);transition:color .2s;white-space:nowrap;}
+    .full-nav a:hover .fnav-sub,.full-nav a.cur .fnav-sub{color:rgba(245,241,234,.32);}
+    .full-nav-foot{margin-top:3rem;font-family:var(--FU);font-size:.6rem;font-weight:300;letter-spacing:.22em;color:rgba(245,241,234,.18);}
+    .full-nav-close{position:absolute;top:1.5rem;right:2rem;font-family:var(--FU);font-size:.6rem;font-weight:300;letter-spacing:.2em;color:var(--muted);background:none;border:none;cursor:pointer;}
+    .full-nav-sns{display:flex;gap:1.8rem;padding-top:2rem;margin-top:2rem;border-top:1px solid rgba(245,241,234,.08);}
+    .fnav-slink{display:flex;align-items:center;gap:.55rem;color:rgba(245,241,234,.35);transition:color .25s;font-family:var(--FU);font-size:.62rem;letter-spacing:.12em;}
+    .fnav-slink:hover{color:var(--cream);}
+    .fnav-slink svg{width:18px;height:18px;flex-shrink:0;overflow:visible;}
+
+    .page-hero{min-height:42vh;background:radial-gradient(ellipse at 25% 60%,rgba(122,98,72,.18) 0%,var(--dark) 65%);display:flex;flex-direction:column;justify-content:flex-end;padding:0 10vw 5vh;position:relative;overflow:hidden;}
+    .page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,241,234,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(245,241,234,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+    .ph-over{font-family:var(--FU);font-size:.55rem;font-weight:300;letter-spacing:.3em;color:rgba(245,241,234,.25);display:flex;align-items:center;gap:.75rem;margin-bottom:2rem;}
+    .ph-over::before{content:'';display:block;width:24px;height:1px;background:var(--br2);}
+    .ph-h1{font-family:var(--FB);font-size:clamp(3rem,8vw,6.5rem);font-weight:300;letter-spacing:-.01em;line-height:.95;color:var(--cream);}
+    .ph-h1 em{font-style:italic;color:var(--br2);}
+    .ph-sub{margin-top:1.5rem;font-family:var(--FJ);font-size:.82rem;font-weight:200;letter-spacing:.18em;color:rgba(245,241,234,.3);}
+
+    #story{background:var(--dark);padding:10vh 10vw;}
+    #story::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,241,234,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(245,241,234,.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+    .story-inner{position:relative;z-index:1;max-width:860px;}
+    .story-tag{font-family:var(--FU);font-size:.58rem;font-weight:300;letter-spacing:.28em;color:var(--br2);display:flex;align-items:center;gap:.75rem;margin-bottom:2rem;}
+    .story-tag::before{content:'';display:block;width:20px;height:1px;background:var(--br2);}
+    .story-h{font-family:var(--FB);font-size:clamp(2rem,4vw,3.5rem);font-weight:300;line-height:1.15;margin-bottom:3rem;color:var(--cream);}
+    .story-h em{font-style:italic;color:var(--br2);}
+    .story-body{font-size:.88rem;font-weight:200;color:rgba(245,241,234,.5);line-height:2.5;letter-spacing:.06em;max-width:620px;}
+    .story-body p+p{margin-top:1.8rem;}
+
+    #values{background:var(--cream2);color:var(--dark);padding:8vh 10vw;min-height:auto;display:block;}
+    .val-tag{font-family:var(--FU);font-size:.58rem;font-weight:300;letter-spacing:.28em;color:var(--br);display:flex;align-items:center;gap:.75rem;margin-bottom:2rem;}
+    .val-tag::before{content:'';display:block;width:20px;height:1px;background:var(--br);}
+    .val-h{font-family:var(--FB);font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;margin-bottom:3.5rem;color:var(--dark);}
+    .val-h em{font-style:italic;color:var(--br);}
+    .val-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(26,23,16,.1);}
+    .val-item{padding:2.5rem 2rem;border-bottom:1px solid rgba(26,23,16,.08);border-right:1px solid rgba(26,23,16,.08);}
+    .val-item:nth-child(2n){border-right:none;}
+    .val-n{font-family:var(--FB);font-size:.78rem;font-style:italic;color:rgba(122,98,72,.35);margin-bottom:.6rem;}
+    .val-title{font-family:var(--FJ);font-size:.95rem;font-weight:300;color:var(--dark);margin-bottom:.5rem;letter-spacing:.06em;}
+    .val-body{font-size:.8rem;color:var(--muted);line-height:2.1;}
+
+    #journal{background:var(--dark);color:var(--cream);padding:8vh 10vw;min-height:auto;display:block;}
+    .jn-tag{font-family:var(--FU);font-size:.58rem;font-weight:300;letter-spacing:.28em;color:var(--br2);display:flex;align-items:center;gap:.75rem;margin-bottom:2rem;}
+    .jn-tag::before{content:'';display:block;width:20px;height:1px;background:var(--br2);}
+    .jn-h{font-family:var(--FB);font-size:clamp(2rem,4vw,3rem);font-weight:300;margin-bottom:.8rem;color:var(--cream);}
+    .jn-h em{font-style:italic;color:var(--br2);}
+    .jn-lead{font-family:var(--FJ);font-size:.8rem;font-weight:200;color:rgba(245,241,234,.4);line-height:2;margin-bottom:3rem;max-width:540px;}
+    .jn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(245,241,234,.07);}
+    .jn-item{padding:2rem 1.5rem;border-right:1px solid rgba(245,241,234,.07);border-bottom:1px solid rgba(245,241,234,.07);}
+    .jn-item:last-child{border-right:none;}
+    .jn-date{font-family:var(--FU);font-size:.5rem;font-weight:300;letter-spacing:.22em;color:var(--br2);margin-bottom:.6rem;}
+    .jn-title{font-family:var(--FJ);font-size:.88rem;font-weight:300;color:var(--cream);margin-bottom:.4rem;}
+    .jn-body{font-size:.76rem;color:rgba(245,241,234,.38);line-height:2.1;}
+    .jn-note-link{display:inline-flex;align-items:center;gap:.5rem;margin-top:2.5rem;font-family:var(--FU);font-size:.58rem;font-weight:300;letter-spacing:.16em;color:var(--br2);border-bottom:1px solid rgba(168,136,96,.3);padding-bottom:.2rem;transition:color .2s;}
+    .jn-note-link:hover{color:var(--cream);}
+
+    #staff{background:var(--cream);color:var(--dark);padding:8vh 10vw;min-height:auto;display:block;}
+    .staff-tag{font-family:var(--FU);font-size:.58rem;font-weight:300;letter-spacing:.28em;color:var(--br);display:flex;align-items:center;gap:.75rem;margin-bottom:2rem;}
+    .staff-tag::before{content:'';display:block;width:20px;height:1px;background:var(--br);}
+    .staff-h{font-family:var(--FB);font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;margin-bottom:3rem;color:var(--dark);}
+    .staff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+    .staff-card{border-top:1px solid rgba(26,23,16,.12);padding-top:1.5rem;}
+    .staff-role{font-family:var(--FU);font-size:.5rem;font-weight:300;letter-spacing:.28em;color:var(--br);margin-bottom:.5rem;}
+    .staff-name{font-family:var(--FB);font-size:1.4rem;font-weight:300;color:var(--dark);margin-bottom:.5rem;}
+    .staff-body{font-size:.78rem;color:var(--muted);line-height:2.1;}
+
+    #quote{background:var(--dark);color:var(--cream);align-items:center;justify-content:center;text-align:center;}
+    .quote-inner{max-width:640px;padding:0 5vw;}
+    .q-rule{width:36px;height:1px;background:var(--br);margin:0 auto 2.5rem;}
+    .q-text{font-family:var(--FB);font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:300;font-style:italic;line-height:1.75;color:var(--cream);}
+    .q-text strong{font-style:normal;font-weight:400;color:var(--br2);}
+    .q-attr{font-family:var(--FU);font-size:.58rem;font-weight:300;letter-spacing:.25em;color:rgba(245,241,234,.3);margin-top:2.5rem;}
+
+    footer{background:var(--dark);border-top:1px solid rgba(245,241,234,.07);padding:2rem 10vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .f-logo{font-family:var(--FB);font-size:1rem;font-weight:300;letter-spacing:.22em;color:var(--cream);}
+    .f-logo em{font-style:italic;color:var(--br2);}
+    .f-nav{display:flex;gap:2rem;}
+    .f-nav a{font-family:var(--FU);font-size:.6rem;font-weight:300;letter-spacing:.15em;color:rgba(245,241,234,.3);transition:color .2s;}
+    .f-nav a:hover{color:var(--cream);}
+    .f-copy{font-family:var(--FU);font-size:.58rem;font-weight:300;letter-spacing:.06em;color:rgba(245,241,234,.18);}
+    .f-nav-ico{display:inline-flex;align-items:center;}
+    .f-nav-ico svg{width:13px;height:13px;overflow:visible;}
+    .rv{opacity:0;transform:translateY(18px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);}
+    .rv.in{opacity:1;transform:none;}
+    .rv.d1{transition-delay:.12s;}.rv.d2{transition-delay:.24s;}
+
+    @media(max-width:900px){
+      .val-grid,.staff-grid{grid-template-columns:1fr;}
+      .val-item{border-right:none;}
+      .jn-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-th" viewBox="0 0 192 192"><path fill="currentColor" d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.881 72.2328C81.6116 63.5383 90.6052 61.6848 97.2286 61.6848C97.3051 61.6848 97.3819 61.6848 97.4576 61.6855C105.707 61.7381 111.932 64.1366 115.961 68.814C118.893 72.2193 120.854 76.925 121.825 82.8638C114.511 81.6207 106.601 81.2385 98.145 81.7233C74.3247 83.0954 59.0111 96.9879 60.0396 116.292C60.5615 126.084 65.4397 134.508 73.775 140.011C80.8224 144.663 89.899 146.938 99.3323 146.423C111.79 145.74 121.563 140.987 128.381 132.296C133.559 125.696 136.834 117.143 138.28 106.366C144.217 109.949 148.617 114.664 151.047 120.332C155.179 129.967 155.42 145.8 142.501 158.708C131.182 170.016 117.576 174.908 97.0135 175.059C74.2042 174.89 56.9538 167.575 45.7381 153.317C35.2355 139.966 29.8077 120.682 29.6052 96C29.8077 71.3178 35.2355 52.0336 45.7381 38.6827C56.9538 24.4249 74.2042 17.11 97.0135 16.9405C119.988 17.1113 137.539 24.4614 149.184 38.788C154.894 45.8136 159.199 54.6488 162.037 64.9503L178.184 60.6422C174.744 47.9622 169.331 37.0357 161.965 27.974C147.036 9.60668 125.202 0.195148 97.0695 0H96.9569C68.8816 0.19447 47.2921 9.6418 32.7883 28.0793C19.8819 44.4864 13.2244 67.3157 13.0007 95.9325L13 96L13.0007 96.0675C13.2244 124.684 19.8819 147.514 32.7883 163.921C47.2921 182.358 68.8816 191.806 96.9569 192H97.0695C122.03 191.827 139.624 185.292 154.118 170.811C173.081 151.866 172.51 128.119 166.26 113.541C161.776 103.087 153.227 94.5962 141.537 88.9883ZM98.4405 129.507C88.0005 130.095 77.1544 125.409 76.6196 115.372C76.2232 107.93 81.9158 99.626 99.0812 98.6368C101.047 98.5234 102.976 98.468 104.871 98.468C111.106 98.468 116.939 99.0737 122.242 100.233C120.264 124.935 108.662 128.946 98.4405 129.507Z"/></symbol>
+</svg>
+<div class="hbg" id="hbg"><span></span><span></span><span></span></div>
+<nav class="full-nav" id="fnav">
+  <button class="full-nav-close" id="fnc">CLOSE</button>
+  <div class="full-nav-logo"><a href="index4.html"><img src="logo.png" alt="OWL 4 U"></a></div>
+  <a href="index4.html">Home<span class="fnav-sub">/ ホーム</span></a>
+  <a href="concept4.html">Concept<span class="fnav-sub">/ サードプレイスを越えるもの</span></a>
+  <a href="about4.html">About<span class="fnav-sub">/ わたしたちについて</span></a>
+  <a href="menu4.html">Menu<span class="fnav-sub">/ コーヒーとクラフトビール</span></a>
+  <a href="events4.html">Events<span class="fnav-sub">/ 想いを持ち込む場所</span></a>
+  <div class="full-nav-sns">
+    <a class="fnav-slink" href="https://x.com/owl4u_tokyo" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-x"/></svg> @owl4u_tokyo</a>
+    <a class="fnav-slink" href="https://www.instagram.com/owl4u_tokyo" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-ig"/></svg> Instagram</a>
+    <a class="fnav-slink" href="https://www.threads.net/@owl4u_tokyo" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-th"/></svg> Threads</a>
+  </div>
+  <div class="full-nav-foot">ALL FOR YOU</div>
+</nav>
+
+<div class="page-hero">
+  <div style="position:absolute;top:2rem;right:2.5rem;z-index:2;background:rgba(236,230,218,.92);padding:6px 12px;"><img src="logo.png" alt="OWL 4 U" style="display:block;width:100px;"></div>
+  <div class="ph-over rv">OWL 4 U — ABOUT</div>
+  <h1 class="ph-h1 rv">わたしたちの、<br><em>話。</em></h1>
+  <p class="ph-sub rv">We opened a cafe. You made it a place.</p>
+</div>
+
+<section id="story">
+  <div class="story-inner rv" style="position:relative;z-index:1;">
+    <div class="story-tag">OUR STORY</div>
+    <h2 class="story-h">居場所を、<br><em>自分たちでつくりたかった。</em></h2>
+    <div class="story-body">
+      <p>OWL 4 U は、「あなたの場所をつくりたい」という、ただそれだけの気持ちから始まりました。特別な資本があったわけでも、飲食の経験があったわけでもない。それでも、誰かが来たときに「ここが自分の場所だ」と感じられる場所を、どうしてもつくりたかった。</p>
+      <p>OWL はフクロウのこと。夜を見通し、静かに耳を傾ける鳥。嬉しいことも、悩みも、どうでもいい話も — 想いを持ってきていい場所でありたい。そう思ったとき、この名前がすんなりと決まった。</p>
+      <p>昼はカフェとして開き、夜はバーへと続く。現在は間借りカフェとして営業しながら、少しずつ形をつくっています。来る理由は何でもいい。ここで過ごす時間が、あなたのものになればいい。</p>
+      <p>まだ始まったばかりで、未完成です。でも、それでいいと思っています。あなたと一緒に、育てていく場所だから。</p>
+    </div>
+  </div>
+</section>
+
+<section id="values" style="min-height:auto;display:block;">
+  <div class="val-tag rv">WHAT WE BELIEVE</div>
+  <h2 class="val-h rv">全員で、<em>つくる。</em></h2>
+  <div class="val-grid">
+    <div class="val-item rv">
+      <div class="val-n">01 —</div>
+      <div class="val-title">あなたの居場所</div>
+      <p class="val-body">特別な理由はいらない。コーヒー一杯でも、誰かに会いたいだけでも、ただ座っていたいだけでも。いつ来ても「ここが自分の場所」と思えるように。</p>
+    </div>
+    <div class="val-item rv d1">
+      <div class="val-n">02 —</div>
+      <div class="val-title">想いが交わる場所</div>
+      <p class="val-body">嬉しいことも、悩みも、どうでもいい話も。ここに持ってきていい。隣の人に話しかけてもいいし、ただ聴いていてもいい。想いが交わる場所でありたい。</p>
+    </div>
+    <div class="val-item rv">
+      <div class="val-n">03 —</div>
+      <div class="val-title">スタッフも初めての挑戦</div>
+      <p class="val-body">OWL 4 U のスタッフにとっても、ここは初めての場所づくり。失敗も試行錯誤も、全部このお店の歴史になる。完成形はまだない。</p>
+    </div>
+    <div class="val-item rv d1">
+      <div class="val-n">04 —</div>
+      <div class="val-title">来た全員がつくる側</div>
+      <p class="val-body">あなたの一言が次のイベントになる。フィードバックがメニューを変える。常連も初見も関係ない。ここに来た全員がこの場所をつくるメンバー。</p>
+    </div>
+  </div>
+</section>
+
+<section id="journal" style="min-height:auto;display:block;">
+  <div class="jn-tag rv">THE MAKING</div>
+  <h2 class="jn-h rv">成長の<em>軌跡</em></h2>
+  <p class="jn-lead rv">お店づくりの様子、試行錯誤、気づき。随時ここに記録していきます。</p>
+  <div class="jn-grid">
+    <div class="jn-item rv">
+      <div class="jn-date">2025.04</div>
+      <div class="jn-title">物件を探しはじめる</div>
+      <p class="jn-body">どんな場所にしたいかを話しながら、いくつかの物件を見て回った。</p>
+    </div>
+    <div class="jn-item rv d1">
+      <div class="jn-date">2025.06</div>
+      <div class="jn-title">間借りカフェとして第一歩</div>
+      <p class="jn-body">まずは場所を借りながら、少しずつはじめることにした。メニューも試作中。</p>
+    </div>
+    <div class="jn-item rv d2">
+      <div class="jn-date">2025.08</div>
+      <div class="jn-title">初めてのイベントを開く</div>
+      <p class="jn-body">スタッフも来るお客さんも、全員が初めての夜だった。</p>
+    </div>
+  </div>
+  <a class="jn-note-link rv" href="https://note.com" target="_blank" rel="noopener noreferrer">もっと読む — note で綴っています →</a>
+</section>
+
+<section id="staff" style="min-height:auto;display:block;">
+  <div class="staff-tag rv">THE TEAM</div>
+  <h2 class="staff-h rv">スタッフ</h2>
+  <div class="staff-grid">
+    <div class="staff-card rv">
+      <div class="staff-role">FOUNDER / BARISTA</div>
+      <div class="staff-name">Coming Soon</div>
+      <p class="staff-body">この場所をつくった人間。コーヒーと話すことが好き。あなたの話を聴くために、ここにいます。</p>
+    </div>
+    <div class="staff-card rv d1">
+      <div class="staff-role">BAR / KITCHEN</div>
+      <div class="staff-name">Coming Soon</div>
+      <p class="staff-body">夜のバータイムを担当。お酒のことなら何でも聞いてください。</p>
+    </div>
+    <div class="staff-card rv d2">
+      <div class="staff-role">STAFF</div>
+      <div class="staff-name">募集中</div>
+      <p class="staff-body">一緒にこの場所をつくってくれるスタッフを探しています。気になる方はInstagramのDMへ。</p>
+    </div>
+  </div>
+</section>
+
+<section id="quote">
+  <div class="quote-inner rv">
+    <div class="q-rule"></div>
+    <p class="q-text">いつ来ても、<br><strong>あなたの席がある。</strong><br>Pour your thoughts. We're here.</p>
+    <p class="q-attr">— OWL 4 U</p>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">OWL <em>4</em> U</div>
+  <nav class="f-nav">
+    <a href="concept4.html">CONCEPT</a><a href="about4.html">ABOUT</a><a href="menu4.html">MENU</a><a href="events4.html">EVENTS</a>
+    <a class="f-nav-ico" href="https://x.com/owl4u_tokyo" target="_blank" rel="noopener noreferrer" aria-label="X"><svg><use href="#i-x"/></svg></a>
+    <a class="f-nav-ico" href="https://www.threads.net/@owl4u_tokyo" target="_blank" rel="noopener noreferrer" aria-label="Threads"><svg><use href="#i-th"/></svg></a>
+    <a class="f-nav-ico" href="https://www.instagram.com/owl4u_tokyo" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
+  </nav>
+  <p class="f-copy">&copy; 2025 OWL 4 U</p>
+</footer>
+<script>
+  const hbg=document.getElementById('hbg'),fnav=document.getElementById('fnav');
+  hbg.onclick=()=>{hbg.classList.toggle('open');fnav.classList.toggle('open');};
+  document.getElementById('fnc').onclick=()=>{hbg.classList.remove('open');fnav.classList.remove('open');};
+  document.querySelectorAll('.full-nav a').forEach(l=>l.onclick=()=>{hbg.classList.remove('open');fnav.classList.remove('open');});
+  const pg=location.pathname.split('/').pop();
+  document.querySelectorAll('.full-nav a').forEach(a=>{if(a.getAttribute('href')===pg)a.classList.add('cur');});
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}}),{threshold:.08});
+  document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

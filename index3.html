@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OWL 4 U — ALL FOR YOU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:    #111010;
+      --bg2:   #1a1919;
+      --red:   #e03a2f;
+      --white: #f2eeea;
+      --gray:  #5a5855;
+      --line:  rgba(242,238,234,.1);
+      --F:     'Cormorant Garamond', serif;
+      --FJ:    'Noto Serif JP', serif;
+      --FU:    'Inter', sans-serif;
+      --PW:    36vw;
+    }
+    html { scroll-behavior: smooth; height: 100%; }
+    body { background: var(--bg); color: var(--white); font-family: var(--FJ); font-weight: 300; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    /* grain */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 1000; pointer-events: none; opacity: .025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 128px;
+    }
+
+    /* ===== LEFT FIXED PANEL ===== */
+    .panel {
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: var(--PW);
+      background: var(--bg);
+      border-right: 1px solid var(--line);
+      z-index: 100;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Big background OWL text inside panel */
+    .panel-bg {
+      position: absolute;
+      bottom: -2vw; left: -1vw;
+      font-family: var(--F);
+      font-size: 20vw;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(242,238,234,.04);
+      line-height: 1;
+      pointer-events: none; user-select: none;
+    }
+    .panel-inner {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column;
+      height: 100%;
+      padding: 2.2rem 2.5vw;
+    }
+    /* Logo */
+    .p-logo { display: block; margin-bottom: -.5rem; }
+    .p-logo img { display: block; width: 130px; filter: invert(1); mix-blend-mode: screen; }
+
+    /* Nav */
+    .p-nav {
+      margin-top: 1.6rem;
+      padding-top: 1.6rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .p-link {
+      font-family: var(--FU);
+      font-size: .6rem; font-weight: 400;
+      letter-spacing: .22em;
+      color: var(--gray);
+      padding: .55rem 0;
+      display: flex; align-items: center; gap: 0;
+      transition: color .25s, gap .3s;
+      border-bottom: 1px solid rgba(242,238,234,.04);
+    }
+    .p-link::before {
+      content: '';
+      width: 0; height: 1px;
+      background: var(--red);
+      transition: width .35s cubic-bezier(.22,1,.36,1), margin-right .35s;
+      flex-shrink: 0;
+    }
+    .p-link:hover { color: var(--white); }
+    .p-link:hover::before { width: 18px; margin-right: .7rem; }
+    .p-link.active { color: var(--white); }
+    .p-link.active::before { width: 18px; margin-right: .7rem; background: var(--red); }
+
+    /* Hero text block in panel */
+    .p-hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: .5rem;
+    }
+    .p-hero-tag {
+      font-family: var(--FU);
+      font-size: .58rem; font-weight: 400;
+      letter-spacing: .22em;
+      color: var(--gray);
+      margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: .7rem;
+    }
+    .p-hero-tag::before { content: ''; width: 18px; height: 1px; background: var(--red); display: block; flex-shrink: 0; }
+    .p-hero-title {
+      font-family: var(--F);
+      font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+      font-weight: 300;
+      letter-spacing: .04em;
+      line-height: .96;
+      color: var(--white);
+    }
+    .p-hero-title .r { color: var(--red); display: block; }
+    .p-hero-concept {
+      margin-top: 1.6rem;
+      font-family: var(--FJ);
+      font-size: .8rem; font-weight: 300;
+      color: var(--gray);
+      line-height: 2.1;
+      border-top: 1px solid var(--line);
+      padding-top: 1.2rem;
+    }
+
+    /* Panel bottom */
+    .p-bottom {
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .p-open-row { display: flex; align-items: center; gap: .55rem; }
+    .p-dot { width: 6px; height: 6px; background: var(--red); border-radius: 50%; animation: blink 1.5s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+    .p-open-text { font-family: var(--FU); font-size: .56rem; letter-spacing: .2em; color: var(--red); }
+    .p-socials { display: flex; flex-direction: column; gap: .35rem; }
+    .p-ig { font-family: var(--FU); font-size: .54rem; letter-spacing: .13em; color: var(--gray); transition: color .2s; white-space: nowrap; }
+    .p-ig:hover { color: var(--white); }
+
+    /* ===== RIGHT SCROLLING CONTENT ===== */
+    .content { margin-left: var(--PW); min-height: 100vh; }
+
+    /* ===== TICKER ===== */
+    .ticker-wrap { border-bottom: 1px solid var(--line); overflow: hidden; padding: 1rem 0; background: var(--red); }
+    .ticker { display: flex; white-space: nowrap; animation: ticker 18s linear infinite; }
+    .ticker-item { display: inline-flex; align-items: center; gap: 2rem; padding: 0 2rem; font-family: var(--F); font-size: 1rem; letter-spacing: .12em; color: var(--bg); }
+    .ticker-dot { width: 5px; height: 5px; background: var(--bg); border-radius: 50%; opacity: .5; flex-shrink: 0; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ===== MANIFESTO ===== */
+    #manifesto { border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; }
+    .mani-left { padding: 5rem 4vw; border-right: 1px solid var(--line); position: relative; overflow: hidden; }
+    .mani-num { font-family: var(--F); font-size: 10rem; color: transparent; -webkit-text-stroke: 1px rgba(242,238,234,.07); line-height: 1; position: absolute; bottom: 1rem; right: 2rem; }
+    .mani-label { font-family: var(--FU); font-size: .62rem; letter-spacing: .25em; color: var(--gray); margin-bottom: 2.5rem; }
+    .mani-heading { font-family: var(--F); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; letter-spacing: .04em; line-height: 1.05; color: var(--white); }
+    .mani-heading .r { color: var(--red); display: block; }
+    .mani-right { display: flex; flex-direction: column; gap: 0; }
+    .mani-item { padding: 2.5rem 3vw; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 32px 1fr; gap: 1.5rem; align-items: start; transition: background .2s; }
+    .mani-item:last-child { border-bottom: none; }
+    .mani-item:hover { background: rgba(242,238,234,.02); }
+    .mani-item-n { font-family: var(--F); font-size: 1.5rem; color: var(--red); line-height: 1; }
+    .mani-item-title { font-family: var(--FJ); font-size: 1rem; font-weight: 400; margin-bottom: .6rem; color: var(--white); }
+    .mani-item-body { font-size: .83rem; font-weight: 300; color: var(--gray); line-height: 2; }
+
+    /* ===== TOGETHER ===== */
+    #together { border-bottom: 1px solid var(--line); overflow: hidden; position: relative; padding: 5rem 4vw; }
+    .together-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--F); font-size: clamp(6rem, 18vw, 16rem); white-space: nowrap; color: transparent; -webkit-text-stroke: 1px rgba(242,238,234,.04); pointer-events: none; user-select: none; letter-spacing: .04em; }
+    .together-inner { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+    .together-label { font-family: var(--FU); font-size: .62rem; letter-spacing: .25em; color: var(--red); margin-bottom: 2rem; }
+    .together-heading { font-family: var(--F); font-size: clamp(2.5rem, 7vw, 6rem); letter-spacing: .04em; line-height: 1; color: var(--white); margin-bottom: 3rem; }
+    .together-heading em { font-style: normal; color: var(--red); }
+    .together-body { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem 5rem; }
+    .together-body p { font-size: .88rem; font-weight: 300; color: var(--gray); line-height: 2.1; }
+    .together-body p strong { display: block; font-family: var(--FU); font-size: .62rem; letter-spacing: .2em; color: var(--red); font-weight: 400; margin-bottom: .5rem; }
+
+    /* ===== MENU ===== */
+    #menu { border-bottom: 1px solid var(--line); }
+    .menu-header { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
+    .menu-h-left { padding: 3rem 4vw; border-right: 1px solid var(--line); display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; }
+    .menu-title { font-family: var(--F); font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: .06em; line-height: 1; }
+    .menu-title .r { color: var(--red); }
+    .menu-h-right { padding: 3rem 4vw; display: flex; flex-direction: column; justify-content: flex-end; }
+    .menu-tabs { display: flex; gap: 0; }
+    .tab-btn { font-family: var(--FU); font-size: .62rem; font-weight: 400; letter-spacing: .2em; color: var(--gray); background: none; border: 1px solid var(--line); border-left: none; cursor: pointer; padding: .65rem 1.4rem; transition: all .2s; }
+    .tab-btn:first-child { border-left: 1px solid var(--line); }
+    .tab-btn.active, .tab-btn:hover { background: var(--red); color: var(--bg); border-color: var(--red); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .menu-item { padding: 1.5rem 2rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: .4rem; transition: background .15s; }
+    .menu-item:nth-child(3n) { border-right: none; }
+    .menu-item:hover { background: rgba(242,238,234,.02); }
+    .menu-item-name { font-size: .9rem; font-weight: 400; color: var(--white); }
+    .menu-item-sub { font-size: .72rem; color: var(--gray); font-weight: 300; }
+    .menu-item-price { margin-top: auto; font-family: var(--F); font-size: 1.1rem; letter-spacing: .06em; color: var(--red); }
+    .menu-note { padding: 1rem 2rem; font-size: .72rem; color: var(--gray); border-top: 1px solid var(--line); }
+
+    /* ===== EVENTS ===== */
+    #events { border-bottom: 1px solid var(--line); }
+    .events-header { padding: 3rem 4vw; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: flex-end; }
+    .events-title { font-family: var(--F); font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: .06em; line-height: 1; }
+    .events-title .r { color: var(--red); }
+    .events-sub { font-family: var(--FJ); font-size: .8rem; font-weight: 300; color: var(--gray); text-align: right; line-height: 1.9; }
+    .event-row { display: grid; grid-template-columns: 80px 1fr auto; gap: 2rem; align-items: center; padding: 1.5rem 4vw; border-bottom: 1px solid var(--line); transition: background .15s; }
+    .event-row:hover { background: rgba(242,238,234,.02); }
+    .event-date { font-family: var(--F); text-align: center; }
+    .event-date .d { font-size: 2.5rem; line-height: 1; letter-spacing: -.02em; }
+    .event-date .m { font-family: var(--FU); font-size: .58rem; letter-spacing: .2em; color: var(--gray); }
+    .event-tags { display: flex; gap: .5rem; margin-bottom: .4rem; }
+    .etag { font-family: var(--FU); font-size: .55rem; letter-spacing: .15em; border: 1px solid var(--line); padding: .2rem .6rem; color: var(--gray); }
+    .etag.red { border-color: var(--red); color: var(--red); }
+    .event-title { font-size: .95rem; font-weight: 400; color: var(--white); }
+    .event-desc { font-size: .78rem; color: var(--gray); margin-top: .2rem; line-height: 1.7; }
+    .event-status { font-family: var(--FU); font-size: .6rem; letter-spacing: .15em; color: var(--gray); white-space: nowrap; }
+    .event-status.on { color: var(--red); }
+
+    /* ===== ACCESS ===== */
+    #access { display: grid; grid-template-columns: 1fr 1fr; }
+    .access-left { padding: 5rem 4vw; border-right: 1px solid var(--line); }
+    .access-title { font-family: var(--F); font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: .06em; line-height: 1; margin: 1rem 0 2.5rem; }
+    .access-title .r { color: var(--red); }
+    .access-dl dt { font-family: var(--FU); font-size: .6rem; letter-spacing: .25em; color: var(--red); margin-top: 1.75rem; margin-bottom: .4rem; }
+    .access-dl dt:first-child { margin-top: 0; }
+    .access-dl dd { font-size: .86rem; color: var(--gray); line-height: 1.9; }
+    .access-dl dd strong { color: var(--white); font-weight: 400; }
+    .hours-g { display: grid; grid-template-columns: auto 1fr; gap: .2rem 1.2rem; font-size: .84rem; margin-top: .3rem; }
+    .hours-g .d { color: #444; font-size: .76rem; }
+    .access-right { min-height: 400px; position: relative; }
+    .access-right iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: invert(1) hue-rotate(180deg) saturate(.6) brightness(.7); }
+
+    /* ===== FOOTER ===== */
+    footer { border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr 1fr; }
+    .f-block { padding: 2rem 2.5rem; border-right: 1px solid var(--line); }
+    .f-block:last-child { border-right: none; }
+    .f-logo { font-family: var(--F); font-size: 1.4rem; letter-spacing: .1em; }
+    .f-logo .r { color: var(--red); }
+    .f-sub { font-family: var(--FU); font-size: .58rem; letter-spacing: .2em; color: var(--gray); margin-top: .3rem; }
+    .f-nav { display: flex; flex-direction: column; gap: .6rem; }
+    .f-nav a { font-family: var(--FU); font-size: .65rem; letter-spacing: .15em; color: var(--gray); transition: color .2s; }
+    .f-nav a:hover { color: var(--white); }
+    .f-copy { font-family: var(--FU); font-size: .6rem; letter-spacing: .06em; color: #333; display: flex; align-items: flex-end; }
+
+    /* ===== MOBILE HAMBURGER (shows when panel is hidden) ===== */
+    .m-hbg {
+      display: none;
+      position: fixed; top: 1.2rem; left: 1.2rem; z-index: 500;
+      flex-direction: column; gap: 5px;
+      background: var(--bg2); border: 1px solid var(--line);
+      padding: .6rem .7rem; cursor: pointer;
+    }
+    .m-hbg span { display: block; width: 20px; height: 1px; background: var(--white); transition: .3s; }
+    .m-hbg.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .m-hbg.open span:nth-child(2) { opacity: 0; }
+    .m-hbg.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* ===== MOBILE NAV OVERLAY ===== */
+    .m-nav { display: none; position: fixed; inset: 0; z-index: 499; background: var(--bg); flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .m-nav.open { display: flex; }
+    .m-nav a { font-family: var(--F); font-size: 2.2rem; letter-spacing: .08em; color: var(--gray); transition: color .2s; }
+    .m-nav a:hover { color: var(--white); }
+
+    /* ===== FADE ===== */
+    .fu { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+    .fu.vis { opacity: 1; transform: none; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .panel { display: none; }
+      .content { margin-left: 0; }
+      .m-hbg { display: flex; }
+      #manifesto, .together-body, .menu-header, #access { grid-template-columns: 1fr; }
+      .mani-left { border-right: none; border-bottom: 1px solid var(--line); }
+      .access-left { border-right: none; border-bottom: 1px solid var(--line); }
+      .menu-h-left { border-right: none; }
+      .menu-grid { grid-template-columns: 1fr 1fr; }
+      .menu-item:nth-child(3n) { border-right: 1px solid var(--line); }
+      .menu-item:nth-child(2n) { border-right: none; }
+      footer { grid-template-columns: 1fr; }
+      .f-block { border-right: none; border-bottom: 1px solid var(--line); }
+      .events-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .events-sub { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LEFT FIXED EDITORIAL PANEL -->
+  <div class="panel">
+    <div class="panel-bg">OWL</div>
+    <div class="panel-inner">
+      <a class="p-logo" href="#"><img src="logo_right.png" alt="OWL 4 U"></a>
+      <nav class="p-nav">
+        <a href="#manifesto" class="p-link" data-sec="manifesto">CONCEPT</a>
+        <a href="#together" class="p-link" data-sec="together">TOGETHER</a>
+        <a href="#menu" class="p-link" data-sec="menu">MENU</a>
+        <a href="#events" class="p-link" data-sec="events">EVENTS</a>
+        <a href="#access" class="p-link" data-sec="access">ACCESS</a>
+      </nav>
+      <div class="p-hero">
+        <div class="p-hero-tag">CAFE &amp; BAR — MORISHITA</div>
+        <h1 class="p-hero-title">YOUR<br>PLACE<br><span class="r">TO BE.</span></h1>
+        <p class="p-hero-concept">
+          いつ来ても自分の想いを共有できる場所——<br>
+          全部、お前らのためにある。
+        </p>
+      </div>
+      <div class="p-bottom">
+        <div class="p-open-row">
+          <div class="p-dot"></div>
+          <span class="p-open-text">OPEN</span>
+        </div>
+        <div class="p-socials">
+          <a href="https://x.com/owl4u_tokyo" class="p-ig" target="_blank" rel="noopener noreferrer">𝕏 @owl4u_tokyo</a>
+          <a href="https://www.threads.net/@owl4u_tokyo" class="p-ig" target="_blank" rel="noopener noreferrer">Threads</a>
+          <a href="https://www.instagram.com/owl4u_tokyo" class="p-ig" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE HAMBURGER -->
+  <button class="m-hbg" id="mHbg" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- MOBILE NAV -->
+  <div class="m-nav" id="mNav">
+    <a href="#manifesto" class="ml">CONCEPT</a>
+    <a href="#together" class="ml">TOGETHER</a>
+    <a href="#menu" class="ml">MENU</a>
+    <a href="#events" class="ml">EVENTS</a>
+    <a href="#access" class="ml">ACCESS</a>
+  </div>
+
+  <!-- RIGHT SCROLLING CONTENT -->
+  <main class="content">
+
+    <!-- TICKER -->
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <span class="ticker-item">ALL FOR YOU<div class="ticker-dot"></div></span>
+        <span class="ticker-item">お前らの居場所<div class="ticker-dot"></div></span>
+        <span class="ticker-item">OWL = ALL FOR YOU<div class="ticker-dot"></div></span>
+        <span class="ticker-item">想いを共有する場所<div class="ticker-dot"></div></span>
+        <span class="ticker-item">CAFE &amp; BAR — MORISHITA<div class="ticker-dot"></div></span>
+        <span class="ticker-item">WE BUILD THIS TOGETHER<div class="ticker-dot"></div></span>
+        <span class="ticker-item">ALL FOR YOU<div class="ticker-dot"></div></span>
+        <span class="ticker-item">お前らの居場所<div class="ticker-dot"></div></span>
+        <span class="ticker-item">OWL = ALL FOR YOU<div class="ticker-dot"></div></span>
+        <span class="ticker-item">想いを共有する場所<div class="ticker-dot"></div></span>
+        <span class="ticker-item">CAFE &amp; BAR — MORISHITA<div class="ticker-dot"></div></span>
+        <span class="ticker-item">WE BUILD THIS TOGETHER<div class="ticker-dot"></div></span>
+      </div>
+    </div>
+
+    <!-- MANIFESTO -->
+    <section id="manifesto">
+      <div class="mani-left fu">
+        <div class="mani-label">WHAT WE ARE</div>
+        <h2 class="mani-heading">YOUR<br>PLACE<br><span class="r">TO BE.</span></h2>
+        <div class="mani-num">01</div>
+      </div>
+      <div class="mani-right fu">
+        <div class="mani-item">
+          <span class="mani-item-n">1</span>
+          <div>
+            <div class="mani-item-title">OWL = ALL FOR YOU</div>
+            <p class="mani-item-body">フクロウは夜を見通し、静かに耳を傾ける。OWL 4 U という名前には「ALL FOR YOU——全部、お前らのため」という意味を重ねました。ここにあるもの全部が、あなたのためにある。</p>
+          </div>
+        </div>
+        <div class="mani-item">
+          <span class="mani-item-n">2</span>
+          <div>
+            <div class="mani-item-title">お前らの居場所</div>
+            <p class="mani-item-body">特別な理由はいらない。コーヒー一杯でも、誰かに会いたいだけでも。いつ来ても「ここが自分の場所」と思えるように、扉は開けておく。</p>
+          </div>
+        </div>
+        <div class="mani-item">
+          <span class="mani-item-n">3</span>
+          <div>
+            <div class="mani-item-title">いつでも想いが共有できる</div>
+            <p class="mani-item-body">嬉しいことも、モヤモヤも、ここに持ってきていい。隣の人に話しかけてもいいし、ただ聴いていてもいい。想いが交わる場所でありたい。</p>
+          </div>
+        </div>
+        <div class="mani-item">
+          <span class="mani-item-n">4</span>
+          <div>
+            <div class="mani-item-title">全員でつくるお店</div>
+            <p class="mani-item-body">スタッフにとっても初めての挑戦。お客さんもスタッフも一緒に、このお店をつくっていく。完成形じゃなくていい——育てていく場所にしたい。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOGETHER -->
+    <section id="together">
+      <div class="together-bg">BUILD</div>
+      <div class="together-inner fu">
+        <div class="together-label">WE BUILD THIS TOGETHER</div>
+        <h2 class="together-heading">全員で<br>つくる<em>。</em></h2>
+        <div class="together-body">
+          <p><strong>STAFF SIDE</strong>OWL 4 U は、スタッフにとっても初めての場所づくり。失敗も、試行錯誤も、全部このお店の歴史になる。だから一緒に盛り上げてほしい。</p>
+          <p><strong>YOUR SIDE</strong>来るたびに少しだけ変わっていく。イベントの感想を言ってくれると次が変わる。フィードバックが、このお店をつくる。</p>
+          <p><strong>COMMUNITY</strong>常連も初見も関係ない。ここに来た全員がこの場所のメンバー。あなたの「また来たい」がエネルギーになる。</p>
+          <p><strong>GROWING</strong>完成形はまだない。今のOWL 4 U を一緒に育てていく。未完成が魅力、くらいの気持ちでいる。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu">
+      <div class="menu-header">
+        <div class="menu-h-left fu">
+          <h2 class="menu-title">WHAT<br>WE <span class="r">SERVE</span></h2>
+          <div></div>
+        </div>
+        <div class="menu-h-right fu">
+          <div style="margin-bottom:1rem;font-family:var(--FU);font-size:.62rem;letter-spacing:.2em;color:var(--gray);">SELECT CATEGORY</div>
+          <div class="menu-tabs">
+            <button class="tab-btn active" data-tab="cafe">CAFE</button>
+            <button class="tab-btn" data-tab="bar">BAR</button>
+            <button class="tab-btn" data-tab="food">FOOD</button>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel active" id="tab-cafe">
+        <div class="menu-grid">
+          <div class="menu-item"><div class="menu-item-name">ハンドドリップコーヒー</div><div class="menu-item-sub">その日の豆でお出しします</div><div class="menu-item-price">¥600</div></div>
+          <div class="menu-item"><div class="menu-item-name">カフェラテ</div><div class="menu-item-sub">HOT / ICED</div><div class="menu-item-price">¥650</div></div>
+          <div class="menu-item"><div class="menu-item-name">抹茶ラテ</div><div class="menu-item-sub">HOT / ICED</div><div class="menu-item-price">¥680</div></div>
+          <div class="menu-item"><div class="menu-item-name">ほうじ茶ラテ</div><div class="menu-item-sub">HOT / ICED</div><div class="menu-item-price">¥650</div></div>
+          <div class="menu-item"><div class="menu-item-name">OWL オリジナルブレンド</div><div class="menu-item-sub">深煎り。夜に飲みたい一杯</div><div class="menu-item-price">¥680</div></div>
+          <div class="menu-item"><div class="menu-item-name">ソフトドリンク各種</div><div class="menu-item-sub">オレンジ / ジンジャーエール 他</div><div class="menu-item-price">¥400〜</div></div>
+        </div>
+        <p class="menu-note">※ メニューは仕入れ状況により変更になる場合があります。</p>
+      </div>
+      <div class="tab-panel" id="tab-bar">
+        <div class="menu-grid">
+          <div class="menu-item"><div class="menu-item-name">クラフトビール</div><div class="menu-item-sub">国内醸造所から厳選</div><div class="menu-item-price">¥800〜</div></div>
+          <div class="menu-item"><div class="menu-item-name">ハイボール</div><div class="menu-item-sub">シングル / ダブル</div><div class="menu-item-price">¥600 / ¥750</div></div>
+          <div class="menu-item"><div class="menu-item-name">ナチュラルワイン</div><div class="menu-item-sub">グラス / ボトル</div><div class="menu-item-price">¥850〜</div></div>
+          <div class="menu-item"><div class="menu-item-name">OWL サワー</div><div class="menu-item-sub">自家製シロップのオリジナル</div><div class="menu-item-price">¥750</div></div>
+          <div class="menu-item"><div class="menu-item-name">日本酒</div><div class="menu-item-sub">季節のおすすめを</div><div class="menu-item-price">¥700〜</div></div>
+          <div class="menu-item"><div class="menu-item-name">ノンアルカクテル</div><div class="menu-item-sub">飲めなくてもどうぞ</div><div class="menu-item-price">¥650</div></div>
+        </div>
+        <p class="menu-note">※ バータイムは17:00〜。</p>
+      </div>
+      <div class="tab-panel" id="tab-food">
+        <div class="menu-grid">
+          <div class="menu-item"><div class="menu-item-name">本日のプレート</div><div class="menu-item-sub">日替わり。コーヒー付き</div><div class="menu-item-price">¥1,200</div></div>
+          <div class="menu-item"><div class="menu-item-name">チーズと生ハムの盛り合わせ</div><div class="menu-item-sub">ワインと</div><div class="menu-item-price">¥1,000</div></div>
+          <div class="menu-item"><div class="menu-item-name">自家製スコーン</div><div class="menu-item-sub">バター / クロテッドクリーム付き</div><div class="menu-item-price">¥500</div></div>
+          <div class="menu-item"><div class="menu-item-name">ナッツ＆ドライフルーツ</div><div class="menu-item-sub">お酒のお供に</div><div class="menu-item-price">¥400</div></div>
+          <div class="menu-item"><div class="menu-item-name">本日のケーキ</div><div class="menu-item-sub">季節の素材で</div><div class="menu-item-price">¥550〜</div></div>
+          <div class="menu-item"><div class="menu-item-name">トースト</div><div class="menu-item-sub">バター / ハニーバター</div><div class="menu-item-price">¥350</div></div>
+        </div>
+        <p class="menu-note">※ フードは数量限定。売り切れの場合はご了承ください。</p>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section id="events">
+      <div class="events-header fu">
+        <h2 class="events-title">WHAT'S <span class="r">ON</span></h2>
+        <p class="events-sub">話すこと、聴くこと、ただいること。<br>そのどれもを大切にしたイベントを不定期開催。</p>
+      </div>
+      <div class="event-row fu">
+        <div class="event-date"><div class="d">21</div><div class="m">JUN 2025</div></div>
+        <div><div class="event-tags"><span class="etag red">LIVE MUSIC</span></div><div class="event-title">夜のフリーライブ vol.1</div><div class="event-desc">アコースティックギターと歌。入れ替えなし、ゆるく。</div></div>
+        <div class="event-status on">OPEN</div>
+      </div>
+      <div class="event-row fu">
+        <div class="event-date"><div class="d">28</div><div class="m">JUN 2025</div></div>
+        <div><div class="event-tags"><span class="etag red">TALK</span></div><div class="event-title">ゆるトーク「最近どう？」</div><div class="event-desc">テーマなし。ただ話したい人が集まる夜。¥500 ドリンク付き</div></div>
+        <div class="event-status on">OPEN</div>
+      </div>
+      <div class="event-row fu">
+        <div class="event-date"><div class="d">05</div><div class="m">JUL 2025</div></div>
+        <div><div class="event-tags"><span class="etag">WORKSHOP</span></div><div class="event-title">コーヒーのはなし</div><div class="event-desc">豆の選び方と抽出のコツ。1ドリンク付き。定員8名。</div></div>
+        <div class="event-status">SOON</div>
+      </div>
+      <div style="padding:1rem 4vw;border-top:1px solid var(--line);display:flex;gap:1.5rem;flex-wrap:wrap;">
+        <a href="https://x.com/owl4u_tokyo" target="_blank" rel="noopener noreferrer" style="font-family:var(--FU);font-size:.65rem;letter-spacing:.15em;color:var(--red);">𝕏 @owl4u_tokyo</a>
+        <a href="https://www.threads.net/@owl4u_tokyo" target="_blank" rel="noopener noreferrer" style="font-family:var(--FU);font-size:.65rem;letter-spacing:.15em;color:var(--gray);">Threads @owl4u_tokyo</a>
+        <a href="https://www.instagram.com/owl4u_tokyo" target="_blank" rel="noopener noreferrer" style="font-family:var(--FU);font-size:.65rem;letter-spacing:.15em;color:var(--gray);">Instagram @owl4u_tokyo</a>
+      </div>
+    </section>
+
+    <!-- ACCESS -->
+    <section id="access">
+      <div class="access-left fu">
+        <div style="font-family:var(--FU);font-size:.62rem;letter-spacing:.25em;color:var(--gray);">ACCESS</div>
+        <h2 class="access-title">FIND <span class="r">US.</span></h2>
+        <dl class="access-dl">
+          <dt>ADDRESS</dt>
+          <dd><strong>OWL 4 U</strong><br>東京都江東区森下3丁目13番7号YAビル1階</dd>
+          <dt>HOURS</dt>
+          <dd><div class="hours-g"><span class="d">Mon–Fri</span><span>11:00 — 22:00</span><span class="d">Sat–Sun</span><span>10:00 — 23:00</span><span class="d">BAR</span><span>17:00 〜</span><span class="d">定休</span><span>不定休（Instagram告知）</span></div></dd>
+          <dt>TRAIN</dt>
+          <dd>都営大江戸線 / 都営新宿線<br><strong>森下駅</strong> 徒歩 ×分</dd>
+          <dt>CONTACT</dt>
+          <dd><a href="mailto:hello@owl4u.jp" style="color:var(--red);">hello@owl4u.jp</a> / Instagram DM</dd>
+        </dl>
+      </div>
+      <div class="access-right">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.0!2d139.797!3d35.678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188919eda27c2f%3A0x0!2z5riL6Kit55m66KW_5bed!5e0!3m2!1sja!2sjp!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="map"></iframe>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="f-block">
+        <div class="f-logo">OWL <span class="r">4</span> U</div>
+        <div class="f-sub">ALL FOR YOU — MORISHITA, KOTO-KU</div>
+      </div>
+      <div class="f-block">
+        <nav class="f-nav">
+          <a href="#manifesto">CONCEPT</a>
+          <a href="#together">TOGETHER</a>
+          <a href="#menu">MENU</a>
+          <a href="#events">EVENTS</a>
+          <a href="#access">ACCESS</a>
+          <a href="https://x.com/owl4u_tokyo" target="_blank" rel="noopener noreferrer">𝕏 @owl4u_tokyo</a>
+          <a href="https://www.threads.net/@owl4u_tokyo" target="_blank" rel="noopener noreferrer">THREADS</a>
+          <a href="https://www.instagram.com/owl4u_tokyo" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+        </nav>
+      </div>
+      <div class="f-block f-copy">&copy; 2025 OWL 4 U</div>
+    </footer>
+
+  </main><!-- .content -->
+
+  <script>
+    // MOBILE HAMBURGER
+    const mHbg = document.getElementById('mHbg');
+    const mNav = document.getElementById('mNav');
+    mHbg.addEventListener('click', () => {
+      mHbg.classList.toggle('open');
+      mNav.classList.toggle('open');
+    });
+    document.querySelectorAll('.ml').forEach(l => l.addEventListener('click', () => {
+      mHbg.classList.remove('open');
+      mNav.classList.remove('open');
+    }));
+
+    // ACTIVE PANEL NAV on scroll
+    const pLinks = document.querySelectorAll('.p-link');
+    const sections = document.querySelectorAll('.content section');
+    const activeObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          pLinks.forEach(l => l.classList.remove('active'));
+          const link = document.querySelector(`.p-link[data-sec="${e.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -65% 0px' });
+    sections.forEach(s => activeObs.observe(s));
+
+    // FADE IN
+    const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);} }), {threshold:.08});
+    document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+
+    // TABS
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    }));
+  </script>
+</body>
+</html>
