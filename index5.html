@@ -248,30 +248,43 @@
       .id-center { border-left: none; border-right: none; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     }
     @media (max-width: 600px) {
-      /* Hero */
-      #hero { min-height: 55vh; }
-      .hero-content { padding: 0 5vw 7vh; }
+      /* Hero: タイトル大きく・中央寄せ */
+      #hero { min-height: 60vh; }
+      .hero-content { padding: 5vw 5vw 8vh; text-align: center; }
+      .hero-title { font-size: clamp(5rem, 28vw, 9rem); }
       .hero-lines { display: none; }
       .hero-scroll { display: none; }
-      .hero-concept { font-size: .88rem; letter-spacing: .12em; }
-      /* Philosophy: 複雑な図解を非表示にしてテキストのみ表示 */
+      .hero-footer { justify-items: center; }
+      .hero-concept { font-size: .92rem; letter-spacing: .1em; }
+      .hero-afy { text-align: center; }
+      /* Philosophy */
       #philosophy { padding: 8vh 5vw; }
       .pd-flow { display: none; }
       .pd-sep { display: none; }
       .pd-compare { display: none; }
       .phi-lead { margin-bottom: 0; }
-      /* Visual SVG: 小さすぎて読めないので非表示 */
+      .phi-lead-main { font-size: clamp(1.1rem, 4.5vw, 1.5rem); }
+      .phi-lead-sub { font-size: clamp(1.2rem, 5vw, 1.7rem); }
+      /* Visual */
       #visual { padding: 6vh 5vw; }
       #visual svg { display: none; }
       .vis-head { margin-bottom: 0; }
+      .vis-title { font-size: clamp(1.3rem, 5.5vw, 2rem); }
       /* Explore */
       .explore-grid { grid-template-columns: 1fr; }
       .explore-card { padding: 2.5rem 1.5rem; }
+      .explore-h { font-size: clamp(1.8rem, 8vw, 2.8rem); }
       /* Identity */
       .id-panel-body { padding: 2.5rem 1.5rem; }
+      .id-pname { font-size: clamp(1.4rem, 6vw, 2rem); }
+      .id-pdesc { font-size: .9rem; }
       .id-center { padding: 3rem 1.5rem; }
+      .id-ctitle { font-size: clamp(1.4rem, 6vw, 2rem); }
+      .id-csub { font-size: .9rem; line-height: 2.2; }
       /* Access */
       .access-l { padding: 6vh 5vw; }
+      .access-title { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+      .adl dd { font-size: .9rem; }
       /* Nav */
       .nav-item a { font-size: 2rem; padding: .5rem 0; }
     }
