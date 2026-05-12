@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200, minimum-scale=0.25, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Event Archive | OWL 4 U</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -154,6 +154,16 @@
       .nav-right { display: none; }
       .nav-left { padding: 5rem 2.5rem 3rem; }
       .nav-item a { font-size: 2.6rem; }
+    }
+    @media (max-width: 600px) {
+      .page-hero { padding: 6vh 5vw 7vh; }
+      #archive { padding: 6vh 5vw; }
+      .arc-grid { grid-template-columns: 1fr; }
+      .ph-sub { font-size: .9rem; letter-spacing: .1em; }
+      .arc-item-name { font-size: 1rem; }
+      .arc-item-desc { font-size: .88rem; line-height: 2.1; }
+      .anote-body { font-size: .9rem; line-height: 2.2; }
+      .nav-item a { font-size: 2rem; padding: .5rem 0; }
     }
   </style>
 </head>
