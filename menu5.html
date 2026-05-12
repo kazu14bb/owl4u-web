@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200, minimum-scale=0.25, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu | OWL 4 U</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -145,9 +145,17 @@
       .nav-item a { font-size: 2.6rem; }
     }
     @media (max-width: 600px) {
+      /* layout */
       .page-hero { padding: 6vh 5vw 7vh; }
       #menu-sec { padding: 6vh 5vw; }
       .tab-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      /* フォントサイズ底上げ */
+      .ph-sub { font-size: .9rem; letter-spacing: .1em; }
+      .sec-title { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+      .menu-name { font-size: .96rem; }
+      .menu-sub { font-size: .8rem; }
+      .menu-price { font-size: 1.05rem; }
+      .menu-note { font-size: .82rem; line-height: 2; }
       .nav-item a { font-size: 2rem; padding: .5rem 0; }
     }
   </style>

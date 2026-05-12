@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200, minimum-scale=0.25, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OWL 4 U — ALL FOR YOU | 江東区森下のカフェ&バー</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -248,15 +248,30 @@
       .id-center { border-left: none; border-right: none; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     }
     @media (max-width: 600px) {
-      .explore-grid { grid-template-columns: 1fr; }
-      .explore-card { padding: 2.8rem 1.5rem; }
-      #philosophy { padding: 10vh 5vw; }
-      .hero-content { padding: 0 5vw 8vh; }
+      /* Hero */
+      #hero { min-height: 55vh; }
+      .hero-content { padding: 0 5vw 7vh; }
       .hero-scroll { display: none; }
+      .hero-concept { font-size: .88rem; letter-spacing: .12em; }
+      /* Philosophy: 複雑な図解を非表示にしてテキストのみ表示 */
+      #philosophy { padding: 8vh 5vw; }
+      .pd-flow { display: none; }
+      .pd-sep { display: none; }
+      .pd-compare { display: none; }
+      .phi-lead { margin-bottom: 0; }
+      /* Visual SVG: 小さすぎて読めないので非表示 */
+      #visual { padding: 6vh 5vw; }
+      #visual svg { display: none; }
+      .vis-head { margin-bottom: 0; }
+      /* Explore */
+      .explore-grid { grid-template-columns: 1fr; }
+      .explore-card { padding: 2.5rem 1.5rem; }
+      /* Identity */
       .id-panel-body { padding: 2.5rem 1.5rem; }
       .id-center { padding: 3rem 1.5rem; }
+      /* Access */
       .access-l { padding: 6vh 5vw; }
-      #visual { padding: 8vh 0 0; }
+      /* Nav */
       .nav-item a { font-size: 2rem; padding: .5rem 0; }
     }
   </style>

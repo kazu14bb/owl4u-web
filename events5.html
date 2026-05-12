@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200, minimum-scale=0.25, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Events | OWL 4 U</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -181,12 +181,23 @@
       .nav-item a { font-size: 2.6rem; }
     }
     @media (max-width: 600px) {
+      /* layout */
       .page-hero { padding: 6vh 5vw 7vh; }
       #events-sec { padding: 6vh 5vw; }
       .ev { grid-template-columns: 1fr; gap: .6rem; }
       .ev-status { display: none; }
+      .cal-wrap { gap: 2rem; }
       #past-events { padding: 5vh 5vw; }
       #sns-note { padding: 6vh 5vw; }
+      /* フォントサイズ底上げ */
+      .ph-sub { font-size: .9rem; letter-spacing: .1em; }
+      .ev-title-h { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+      .ev-date .ev-day { font-size: 2.2rem; }
+      .ev-name { font-size: 1rem; }
+      .ev-desc { font-size: .88rem; line-height: 2; }
+      .sns-h { font-size: clamp(1.3rem, 5.5vw, 2rem); white-space: normal; }
+      .sns-body { font-size: .9rem; }
+      .past-name { font-size: .92rem; }
       .nav-item a { font-size: 2rem; padding: .5rem 0; }
     }
   </style>

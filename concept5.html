@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200, minimum-scale=0.25, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Concept | OWL 4 U</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -152,6 +152,7 @@
       .phi-vis{grid-template-columns:1fr;}.phi-vis-mid{flex-direction:row;height:40px;}.phi-vis-mid-line{flex:1;height:1px;width:auto;}.phi-vis-mid-badge{writing-mode:horizontal-tb;transform:none;}
     }
     @media (max-width: 600px) {
+      /* layout */
       .together-grid { grid-template-columns: 1fr; }
       .tg { padding: 2rem 1.2rem; }
       #philosophy { padding: 8vh 5vw; }
@@ -159,6 +160,20 @@
       .meaning-r { padding: 6vh 5vw; }
       #together { padding: 8vh 5vw; }
       #quote { padding: 8vh 5vw; }
+      /* phi-vis パネルを非表示（小さすぎて読めないため） */
+      .phi-vis { display: none; }
+      /* フォントサイズ底上げ */
+      .phi-lead-main { font-size: clamp(1.1rem, 4vw, 1.6rem); line-height: 2; }
+      .phi-lead-sub { font-size: clamp(1.2rem, 4.5vw, 1.8rem); }
+      .phi-foot { font-size: .88rem; }
+      .meaning-l-title { font-size: clamp(2.4rem, 8vw, 3.4rem); }
+      .meaning-l-sub { font-size: .94rem; line-height: 2.2; letter-spacing: .08em; }
+      .mp-title { font-size: 1.05rem; }
+      .mp-body { font-size: .9rem; line-height: 2.1; }
+      .together-title { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+      .tg-title { font-size: .96rem; }
+      .tg-body { font-size: .88rem; line-height: 2.1; }
+      .quote-text { font-size: clamp(1.3rem, 5vw, 2rem); }
       .nav-item a { font-size: 2rem; padding: .5rem 0; }
     }
     .site-sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--SB); z-index: 650; background: var(--w1); border-right: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; padding-top: 2rem; padding-bottom: 0; transition: opacity .35s ease; }

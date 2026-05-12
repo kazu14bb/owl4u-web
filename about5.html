@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200, minimum-scale=0.25, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About | OWL 4 U</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -114,11 +114,20 @@
       footer { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 600px) {
+      /* layout */
       .page-hero { padding: 6vh 5vw 7vh; }
       .story-l { padding: 6vh 5vw; }
       .story-r { padding: 6vh 5vw; }
       #journal { padding: 6vh 5vw; }
       #staff { padding: 6vh 5vw; }
+      /* フォントサイズ底上げ */
+      .ph-sub { font-size: .9rem; letter-spacing: .1em; }
+      .story-h { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+      .story-body p { font-size: .92rem; line-height: 2.2; }
+      .jn-title { font-size: .96rem; }
+      .jn-body { font-size: .88rem; line-height: 2.1; }
+      .staff-name { font-size: 1.5rem; }
+      .staff-body { font-size: .9rem; line-height: 2.1; }
       .nav-item a { font-size: 2rem; padding: .5rem 0; }
     }
     .site-sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--SB); z-index: 650; background: var(--w1); border-right: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; padding-top: 2rem; padding-bottom: 0; transition: opacity .35s ease; }
