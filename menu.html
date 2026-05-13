@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Event Archive | OWL 4 U</title>
+  <title>Menu | OWL 4 U</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -45,62 +45,51 @@
     .reveal { opacity:0;transform:translateY(18px);transition:opacity 1s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.22,1,.36,1); }
     .reveal.in { opacity:1;transform:none; }
     .reveal.d1 { transition-delay:.12s; }
-    .reveal.d2 { transition-delay:.24s; }
 
-    .page-hero { min-height:48vh;background:var(--w1);border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end;padding:8vh 8vw 10vh;position:relative;overflow:hidden; }
+    .page-hero { min-height:52vh;background:var(--w1);border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-start;padding:8vh 8vw 10vh;position:relative;overflow:hidden; }
     .page-hero::before { content:'';position:absolute;inset:0;background-image:linear-gradient(var(--lineD) 1px,transparent 1px),linear-gradient(90deg,var(--lineD) 1px,transparent 1px);background-size:60px 60px;pointer-events:none; }
     .ph-over { font-family:var(--FU);font-size:.55rem;font-weight:300;letter-spacing:.3em;color:var(--muted);display:flex;align-items:center;gap:.75rem;margin-bottom:2rem;position:relative;z-index:1; }
     .ph-over::before { content:'';display:block;width:24px;height:1px;background:var(--br); }
     .ph-h1 { font-family:var(--FB);font-size:clamp(3rem,8vw,6.5rem);font-weight:300;letter-spacing:-.01em;line-height:.95;color:var(--dark);position:relative;z-index:1; }
     .ph-h1 em { font-style:italic;color:var(--br); }
-    .ph-sub { margin-top:1.5rem;font-family:var(--FU);font-size:.7rem;font-weight:300;letter-spacing:.18em;color:var(--muted);position:relative;z-index:1; }
-    .ph-back { margin-top:1.2rem;font-family:var(--FU);font-size:.54rem;font-weight:300;letter-spacing:.16em;color:var(--br);display:inline-flex;align-items:center;gap:.4rem;transition:color .2s;position:relative;z-index:1; }
-    .ph-back:hover { color:var(--dark); }
+    .ph-sub { margin-top:1.5rem;font-family:var(--FJ);font-size:.82rem;font-weight:200;letter-spacing:.18em;color:var(--muted);position:relative;z-index:1; }
 
-    #archive { background:var(--w0);color:var(--dark);padding:8vh 7vw; }
-    .arc-head { margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--line); }
-    .arc-tag { font-family:var(--FU);font-size:.58rem;font-weight:300;letter-spacing:.28em;color:var(--br);display:flex;align-items:center;gap:.75rem;margin-bottom:.8rem; }
-    .arc-tag::before { content:'';display:block;width:18px;height:1px;background:var(--br); }
-    .arc-h { font-family:var(--FB);font-size:clamp(2rem,4vw,3.2rem);font-weight:300;line-height:1.1;color:var(--dark); }
-    .arc-h em { font-style:italic;color:var(--br); }
-    .arc-filter { display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:3rem; }
-    .arc-ft { font-family:var(--FU);font-size:.5rem;font-weight:300;letter-spacing:.2em;color:var(--muted);border:1px solid var(--line);padding:.3rem .8rem;cursor:pointer;transition:all .2s; }
-    .arc-ft.active,.arc-ft:hover { color:var(--br);border-color:rgba(107,92,72,.3);background:rgba(107,92,72,.06); }
-    .arc-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line); }
-    .arc-item { background:var(--w0);padding:2.5rem 2rem;display:flex;flex-direction:column;gap:1rem;transition:background .2s; }
-    .arc-item:hover { background:var(--w1); }
-    .arc-item-meta { display:flex;align-items:center;gap:1rem; }
-    .arc-item-type { font-family:var(--FU);font-size:.48rem;font-weight:300;letter-spacing:.28em;color:var(--br); }
-    .arc-item-date { font-family:var(--FU);font-size:.48rem;font-weight:300;letter-spacing:.15em;color:var(--muted); }
-    .arc-item-name { font-family:var(--FJ);font-size:.95rem;font-weight:300;color:var(--dark);line-height:1.6; }
-    .arc-item-desc { font-size:.78rem;color:var(--muted);line-height:2;flex:1; }
-    .arc-photo { width:100%;aspect-ratio:16/9;background:var(--w1);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--FU);font-size:.46rem;letter-spacing:.15em;color:rgba(28,26,21,.2); }
-    .arc-photo img { width:100%;height:100%;object-fit:cover;display:block; }
+    #menu-sec { padding: 8vh 7vw; background: var(--w1); border-bottom: 1px solid var(--line); }
+    .sec-head { display: grid; grid-template-columns: 1fr auto; align-items: flex-end; gap: 2rem; margin-bottom: 3.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--line); }
+    .sec-tag { font-family: var(--FU); font-size: .58rem; font-weight: 300; letter-spacing: .28em; color: var(--muted); display: flex; align-items: center; gap: .75rem; margin-bottom: .8rem; }
+    .sec-tag::before { content: ''; display: block; width: 18px; height: 1px; background: var(--muted); }
+    .sec-title { font-family: var(--FB); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.1; color: var(--dark); }
+    .sec-title em { font-style: italic; color: var(--br); }
+    .tabs { display: flex; gap: 0; }
+    .tab-btn { font-family: var(--FU); font-size: .6rem; font-weight: 300; letter-spacing: .2em; background: none; border: 1px solid var(--line); border-left: none; padding: .6rem 1.3rem; color: var(--muted); cursor: pointer; transition: all .25s; }
+    .tab-btn:first-child { border-left: 1px solid var(--line); }
+    .tab-btn.active, .tab-btn:hover { background: var(--dark); color: var(--w0); border-color: var(--dark); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .menu-list { display: flex; flex-direction: column; }
+    .menu-section-label { font-family: var(--FU); font-size: .5rem; font-weight: 300; letter-spacing: .3em; color: var(--br); margin: 2rem 0 .5rem; padding-bottom: .5rem; border-bottom: 1px solid var(--lineD); }
+    .menu-row { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2rem; padding: 1.1rem 0; border-bottom: 1px solid var(--lineD); transition: padding-left .3s; cursor: default; }
+    .menu-row:hover { padding-left: .6rem; }
+    .menu-name { font-family: var(--FJ); font-size: .9rem; font-weight: 300; color: var(--dark); letter-spacing: .04em; }
+    .menu-sub { font-size: .7rem; font-weight: 300; color: var(--muted); margin-top: .2rem; }
+    .menu-price { font-family: var(--FB); font-size: 1rem; font-weight: 300; font-style: italic; color: var(--br); white-space: nowrap; }
+    .menu-note { margin-top: 1.5rem; font-size: .7rem; font-weight: 300; color: var(--muted); letter-spacing: .04em; line-height: 1.9; }
 
-    #archive-note { background:var(--dark);padding:6vh 7vw; }
-    .anote-inner { max-width:540px; }
-    .anote-tag { font-family:var(--FU);font-size:.56rem;font-weight:300;letter-spacing:.26em;color:var(--br2);display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem; }
-    .anote-tag::before { content:'';display:block;width:16px;height:1px;background:var(--br2); }
-    .anote-h { font-family:var(--FB);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:300;color:#ffffff;margin-bottom:.8rem; }
-    .anote-body { font-family:var(--FJ);font-size:.8rem;font-weight:200;color:rgba(255,255,255,.45);line-height:2.2;margin-bottom:1.8rem; }
-    .anote-link { display:inline-flex;align-items:center;gap:.4rem;font-family:var(--FU);font-size:.56rem;font-weight:300;letter-spacing:.16em;color:var(--br2);border-bottom:1px solid rgba(149,122,94,.3);padding-bottom:.2rem;transition:color .2s; }
-    .anote-link:hover { color:#ffffff; }
-
-    footer { background:var(--dark);border-top:1px solid rgba(243,240,235,.05);padding:2.5rem 7vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem; }
-    .f-logo { font-family:var(--FB);font-size:1rem;font-weight:300;letter-spacing:.28em;color:#ffffff; }
-    .f-logo i { font-style:italic;color:var(--br2); }
-    .f-sub { font-family:var(--FU);font-size:.53rem;font-weight:300;letter-spacing:.22em;color:rgba(243,240,235,.2);margin-top:.3rem; }
-    .f-nav { display:flex;gap:2rem; }
-    .f-nav a { font-family:var(--FU);font-size:.6rem;font-weight:300;letter-spacing:.18em;color:rgba(243,240,235,.3);transition:color .2s; }
-    .f-nav a:hover { color:#ffffff; }
-    .f-copy { font-family:var(--FU);font-size:.58rem;font-weight:300;letter-spacing:.06em;color:rgba(243,240,235,.15); }
-    .f-nav-ico { display:inline-flex;align-items:center; }
-    .f-nav-ico svg { width:13px;height:13px;overflow:visible; }
+    footer { background: var(--dark); border-top: 1px solid rgba(243,240,235,.05); padding: 2.5rem 7vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    .f-logo { font-family: var(--FB); font-size: 1rem; font-weight: 300; letter-spacing: .28em; color: var(--w0); }
+    .f-logo i { font-style: italic; color: var(--br2); }
+    .f-sub { font-family: var(--FU); font-size: .53rem; font-weight: 300; letter-spacing: .22em; color: rgba(243,240,235,.2); margin-top: .3rem; }
+    .f-nav { display: flex; gap: 2rem; }
+    .f-nav a { font-family: var(--FU); font-size: .6rem; font-weight: 300; letter-spacing: .18em; color: rgba(243,240,235,.3); transition: color .2s; }
+    .f-nav a:hover { color: var(--w0); }
+    .f-copy { font-family: var(--FU); font-size: .58rem; font-weight: 300; letter-spacing: .06em; color: rgba(243,240,235,.15); }
+    .f-nav-ico { display: inline-flex; align-items: center; }
+    .f-nav-ico svg { width: 13px; height: 13px; overflow: visible; }
 
     @media (max-width: 900px) {
       .rsb { display: none; }
       .rsb-hbg { display: flex; }
-      .arc-grid { grid-template-columns: 1fr; }
+      .sec-head { grid-template-columns: 1fr; gap: 1.5rem; }
       footer { flex-direction: column; align-items: flex-start; }
     }
     .site-sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--SB); z-index: 650; background: var(--w1); border-right: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; padding-top: 2rem; padding-bottom: 0; transition: opacity .35s ease; }
@@ -157,13 +146,17 @@
     }
     @media (max-width: 600px) {
       body { word-break: auto-phrase; overflow-wrap: anywhere; }
+      /* layout */
       .page-hero { padding: 6vh 5vw 7vh; }
-      #archive { padding: 6vh 5vw; }
-      .arc-grid { grid-template-columns: 1fr; }
+      #menu-sec { padding: 6vh 5vw; }
+      .tab-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      /* フォントサイズ底上げ */
       .ph-sub { font-size: .9rem; letter-spacing: .1em; }
-      .arc-item-name { font-size: 1rem; }
-      .arc-item-desc { font-size: .88rem; line-height: 2.1; }
-      .anote-body { font-size: .9rem; line-height: 2.2; }
+      .sec-title { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+      .menu-name { font-size: .96rem; }
+      .menu-sub { font-size: .8rem; }
+      .menu-price { font-size: 1.05rem; }
+      .menu-note { font-size: .82rem; line-height: 2; }
       .nav-item a { font-size: 2rem; padding: .5rem 0; }
       .nav-left { padding: 3.5rem 1.5rem 2rem; }
       .nav-right-inner { padding: 2rem .8rem; gap: 1rem; }
@@ -193,11 +186,11 @@
   </button>
   <div class="nav-left">
     <ul class="nav-items">
-      <li class="nav-item"><a href="index5.html">Top<span class="nav-jp">トップ</span></a></li>
-      <li class="nav-item"><a href="concept5.html">Concept<span class="nav-jp">コンセプト</span></a></li>
-      <li class="nav-item"><a href="about5.html">About<span class="nav-jp">お店について</span></a></li>
-      <li class="nav-item"><a href="menu5.html">Menu<span class="nav-jp">メニュー</span></a></li>
-      <li class="nav-item"><a href="events5.html">Schedule<span class="nav-jp">営業スケジュール</span></a></li>
+      <li class="nav-item"><a href="index.html">Top<span class="nav-jp">トップ</span></a></li>
+      <li class="nav-item"><a href="concept.html">Concept<span class="nav-jp">コンセプト</span></a></li>
+      <li class="nav-item"><a href="about.html">About<span class="nav-jp">お店について</span></a></li>
+      <li class="nav-item"><a href="menu.html">Menu<span class="nav-jp">メニュー</span></a></li>
+      <li class="nav-item"><a href="events.html">Schedule<span class="nav-jp">営業スケジュール</span></a></li>
     </ul>
   </div>
   <div class="nav-right">
@@ -213,66 +206,75 @@
 </div>
 
 <div class="page-hero">
-  <div class="ph-over reveal">OWL 4 U — EVENT ARCHIVE</div>
-  <h1 class="ph-h1 reveal">記録と、<br><em>記憶。</em></h1>
-  <p class="ph-sub reveal">Events that happened here.</p>
-  <a class="ph-back reveal" href="events5.html">← Events に戻る</a>
+  <div class="ph-over reveal">OWL 4 U — MENU</div>
+  <h1 class="ph-h1 reveal">昼はコーヒー、<br><em>夜はクラフトビール。</em></h1>
+  <p class="ph-sub reveal">Crafted by day. Poured by night.</p>
 </div>
 
-<div id="archive">
-  <div class="arc-head reveal">
-    <div class="arc-tag">ALL EVENTS</div>
-    <h2 class="arc-h">過去の<em>イベント一覧</em></h2>
-  </div>
-  <div class="arc-filter reveal">
-    <div class="arc-ft active">ALL</div>
-    <div class="arc-ft">OPEN MIC</div>
-    <div class="arc-ft">WORKSHOP</div>
-    <div class="arc-ft">GATHERING</div>
-  </div>
-  <div class="arc-grid">
-    <div class="arc-item reveal">
-      <div class="arc-item-meta">
-        <div class="arc-item-type">OPEN</div>
-        <div class="arc-item-date">2025.06</div>
-      </div>
-      <div class="arc-item-name">オープン記念 — 無料ドリンクデー</div>
-      <p class="arc-item-desc">最初の一日。何もなかったこの場所に、初めて人が来てくれた夜のこと。</p>
-      <div class="arc-photo">PHOTO COMING SOON</div>
+<div id="menu-sec">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">OUR MENU</div>
+      <h2 class="sec-title">朝の一杯から、<br><em>夜のグラスまで。</em></h2>
     </div>
-    <div class="arc-item reveal d1">
-      <div class="arc-item-meta">
-        <div class="arc-item-type">GATHERING</div>
-        <div class="arc-item-date">2025.07</div>
-      </div>
-      <div class="arc-item-name">スタッフと話す夜</div>
-      <p class="arc-item-desc">スタッフが前に出て、来てくれた人たちと普通に話した夜。普通が、いちばん大事だった。</p>
-      <div class="arc-photo">PHOTO COMING SOON</div>
-    </div>
-    <div class="arc-item reveal">
-      <div class="arc-item-meta">
-        <div class="arc-item-type">WORKSHOP</div>
-        <div class="arc-item-date">2025.08</div>
-      </div>
-      <div class="arc-item-name">カクテルをつくる会</div>
-      <p class="arc-item-desc">みんなで一杯ずつつくって、飲んで、笑った夜。レシピより記憶に残る時間だった。</p>
-      <div class="arc-photo">PHOTO COMING SOON</div>
-    </div>
-    <div class="arc-item reveal d1" style="display:flex;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;background:var(--w1);">
-      <div>
-        <div style="font-family:var(--FU);font-size:.48rem;letter-spacing:.22em;color:rgba(28,26,21,.25);margin-bottom:.8rem;">COMING SOON</div>
-        <div style="font-family:var(--FB);font-size:1.2rem;font-weight:300;color:rgba(28,26,21,.2);">次のイベントを記録していきます</div>
-      </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="cafe">CAFE</button>
+      <button class="tab-btn" data-tab="bar">BAR</button>
+      <button class="tab-btn" data-tab="food">FOOD</button>
     </div>
   </div>
-</div>
 
-<div id="archive-note">
-  <div class="anote-inner reveal">
-    <div class="anote-tag">NOTE</div>
-    <h3 class="anote-h">もっと詳しく読みたい方へ</h3>
-    <p class="anote-body">各イベントのより詳しいレポート、舞台裏、スタッフの感想などは note でまとめています。気軽に読みに来てください。</p>
-    <a class="anote-link" href="https://note.com" target="_blank" rel="noopener noreferrer">note で読む →</a>
+  <div class="tab-panel active" id="tab-cafe">
+    <div class="menu-list reveal">
+      <div class="menu-section-label">HOT COFFEE</div>
+      <div class="menu-row"><div><div class="menu-name">エスプレッソ</div><div class="menu-sub">Espresso</div></div><div class="menu-price">¥ 450</div></div>
+      <div class="menu-row"><div><div class="menu-name">アメリカーノ</div><div class="menu-sub">Americano</div></div><div class="menu-price">¥ 500</div></div>
+      <div class="menu-row"><div><div class="menu-name">カフェラテ</div><div class="menu-sub">Cafe Latte</div></div><div class="menu-price">¥ 600</div></div>
+      <div class="menu-row"><div><div class="menu-name">カプチーノ</div><div class="menu-sub">Cappuccino</div></div><div class="menu-price">¥ 600</div></div>
+      <div class="menu-row"><div><div class="menu-name">フラットホワイト</div><div class="menu-sub">Flat White</div></div><div class="menu-price">¥ 650</div></div>
+      <div class="menu-section-label">ICED COFFEE</div>
+      <div class="menu-row"><div><div class="menu-name">アイスラテ</div><div class="menu-sub">Iced Latte</div></div><div class="menu-price">¥ 650</div></div>
+      <div class="menu-row"><div><div class="menu-name">コールドブリュー</div><div class="menu-sub">Cold Brew</div></div><div class="menu-price">¥ 700</div></div>
+      <div class="menu-section-label">TEA & OTHERS</div>
+      <div class="menu-row"><div><div class="menu-name">紅茶</div><div class="menu-sub">English Breakfast / Earl Grey</div></div><div class="menu-price">¥ 500</div></div>
+      <div class="menu-row"><div><div class="menu-name">ほうじ茶ラテ</div><div class="menu-sub">Hojicha Latte</div></div><div class="menu-price">¥ 620</div></div>
+      <div class="menu-row"><div><div class="menu-name">ソーダ</div><div class="menu-sub">Soda / Ginger Ale</div></div><div class="menu-price">¥ 400</div></div>
+    </div>
+    <p class="menu-note reveal">※ 価格はすべて税込。メニューは随時更新中。</p>
+  </div>
+
+  <div class="tab-panel" id="tab-bar">
+    <div class="menu-list reveal">
+      <div class="menu-section-label">BEER</div>
+      <div class="menu-row"><div><div class="menu-name">クラフトビール（生）</div><div class="menu-sub">Craft Beer on Tap — 季節により変更あり</div></div><div class="menu-price">¥ 800</div></div>
+      <div class="menu-row"><div><div class="menu-name">ボトルビール</div><div class="menu-sub">Bottled Beer</div></div><div class="menu-price">¥ 700</div></div>
+      <div class="menu-section-label">WINE</div>
+      <div class="menu-row"><div><div class="menu-name">赤ワイン</div><div class="menu-sub">Red Wine / Glass</div></div><div class="menu-price">¥ 750</div></div>
+      <div class="menu-row"><div><div class="menu-name">白ワイン</div><div class="menu-sub">White Wine / Glass</div></div><div class="menu-price">¥ 750</div></div>
+      <div class="menu-section-label">SPIRITS & COCKTAILS</div>
+      <div class="menu-row"><div><div class="menu-name">ハイボール</div><div class="menu-sub">Highball</div></div><div class="menu-price">¥ 700</div></div>
+      <div class="menu-row"><div><div class="menu-name">カクテル</div><div class="menu-sub">Cocktails — バーテンダーにお聞きください</div></div><div class="menu-price">¥ 900〜</div></div>
+      <div class="menu-row"><div><div class="menu-name">日本酒</div><div class="menu-sub">Sake / Glass</div></div><div class="menu-price">¥ 800〜</div></div>
+      <div class="menu-section-label">NON-ALCOHOL</div>
+      <div class="menu-row"><div><div class="menu-name">ノンアルコールビール</div></div><div class="menu-price">¥ 650</div></div>
+      <div class="menu-row"><div><div class="menu-name">モクテル</div><div class="menu-sub">Mocktail — バーテンダーにお聞きください</div></div><div class="menu-price">¥ 800〜</div></div>
+    </div>
+    <p class="menu-note reveal">※ バータイムは 17:00〜。価格はすべて税込。</p>
+  </div>
+
+  <div class="tab-panel" id="tab-food">
+    <div class="menu-list reveal">
+      <div class="menu-section-label">LIGHT FOOD</div>
+      <div class="menu-row"><div><div class="menu-name">トースト</div><div class="menu-sub">バター / ジャム</div></div><div class="menu-price">¥ 400</div></div>
+      <div class="menu-row"><div><div class="menu-name">チーズトースト</div></div><div class="menu-price">¥ 500</div></div>
+      <div class="menu-row"><div><div class="menu-name">チーズプレート</div><div class="menu-sub">3種盛り / ナッツ添え</div></div><div class="menu-price">¥ 900</div></div>
+      <div class="menu-row"><div><div class="menu-name">ミックスナッツ</div></div><div class="menu-price">¥ 450</div></div>
+      <div class="menu-row"><div><div class="menu-name">オリーブ</div><div class="menu-sub">マリネ</div></div><div class="menu-price">¥ 400</div></div>
+      <div class="menu-section-label">SWEETS</div>
+      <div class="menu-row"><div><div class="menu-name">本日のケーキ</div><div class="menu-sub">日替わり</div></div><div class="menu-price">¥ 550</div></div>
+      <div class="menu-row"><div><div class="menu-name">クッキー</div><div class="menu-sub">2枚</div></div><div class="menu-price">¥ 300</div></div>
+    </div>
+    <p class="menu-note reveal">※ フードは数量限定。売り切れ次第終了。価格はすべて税込。<br>※ アレルギーのある方はスタッフにお申し付けください。</p>
   </div>
 </div>
 
@@ -286,11 +288,14 @@
   navOverlay.querySelectorAll('.nav-item a').forEach(a => a.addEventListener('click', closeNav));
   navOverlay.querySelector('.nav-right').addEventListener('click', closeNav);
   document.getElementById('navCloseBtn').addEventListener('click', closeNav);
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  }));
   const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }); }, { threshold: .08 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-  document.querySelectorAll('.arc-ft').forEach(ft => {
-    ft.onclick = () => { document.querySelectorAll('.arc-ft').forEach(f => f.classList.remove('active')); ft.classList.add('active'); };
-  });
 </script>
 </body>
 </html>

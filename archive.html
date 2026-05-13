@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Access | OWL 4 U</title>
+  <title>Event Archive | OWL 4 U</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -45,6 +45,7 @@
     .reveal { opacity:0;transform:translateY(18px);transition:opacity 1s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.22,1,.36,1); }
     .reveal.in { opacity:1;transform:none; }
     .reveal.d1 { transition-delay:.12s; }
+    .reveal.d2 { transition-delay:.24s; }
 
     .page-hero { min-height:48vh;background:var(--w1);border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end;padding:8vh 8vw 10vh;position:relative;overflow:hidden; }
     .page-hero::before { content:'';position:absolute;inset:0;background-image:linear-gradient(var(--lineD) 1px,transparent 1px),linear-gradient(90deg,var(--lineD) 1px,transparent 1px);background-size:60px 60px;pointer-events:none; }
@@ -52,43 +53,54 @@
     .ph-over::before { content:'';display:block;width:24px;height:1px;background:var(--br); }
     .ph-h1 { font-family:var(--FB);font-size:clamp(3rem,8vw,6.5rem);font-weight:300;letter-spacing:-.01em;line-height:.95;color:var(--dark);position:relative;z-index:1; }
     .ph-h1 em { font-style:italic;color:var(--br); }
-    .ph-sub { margin-top:1.5rem;font-family:var(--FJ);font-size:.82rem;font-weight:200;letter-spacing:.18em;color:var(--muted);position:relative;z-index:1; }
+    .ph-sub { margin-top:1.5rem;font-family:var(--FU);font-size:.7rem;font-weight:300;letter-spacing:.18em;color:var(--muted);position:relative;z-index:1; }
+    .ph-back { margin-top:1.2rem;font-family:var(--FU);font-size:.54rem;font-weight:300;letter-spacing:.16em;color:var(--br);display:inline-flex;align-items:center;gap:.4rem;transition:color .2s;position:relative;z-index:1; }
+    .ph-back:hover { color:var(--dark); }
 
-    .map-wrap { width: 100%; max-width: 1100px; margin: 0 auto; height: 38vh; position: relative; border-bottom: 1px solid var(--line); }
-    .map-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(0.15) contrast(1.02); }
+    #archive { background:var(--w0);color:var(--dark);padding:8vh 7vw; }
+    .arc-head { margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--line); }
+    .arc-tag { font-family:var(--FU);font-size:.58rem;font-weight:300;letter-spacing:.28em;color:var(--br);display:flex;align-items:center;gap:.75rem;margin-bottom:.8rem; }
+    .arc-tag::before { content:'';display:block;width:18px;height:1px;background:var(--br); }
+    .arc-h { font-family:var(--FB);font-size:clamp(2rem,4vw,3.2rem);font-weight:300;line-height:1.1;color:var(--dark); }
+    .arc-h em { font-style:italic;color:var(--br); }
+    .arc-filter { display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:3rem; }
+    .arc-ft { font-family:var(--FU);font-size:.5rem;font-weight:300;letter-spacing:.2em;color:var(--muted);border:1px solid var(--line);padding:.3rem .8rem;cursor:pointer;transition:all .2s; }
+    .arc-ft.active,.arc-ft:hover { color:var(--br);border-color:rgba(107,92,72,.3);background:rgba(107,92,72,.06); }
+    .arc-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line); }
+    .arc-item { background:var(--w0);padding:2.5rem 2rem;display:flex;flex-direction:column;gap:1rem;transition:background .2s; }
+    .arc-item:hover { background:var(--w1); }
+    .arc-item-meta { display:flex;align-items:center;gap:1rem; }
+    .arc-item-type { font-family:var(--FU);font-size:.48rem;font-weight:300;letter-spacing:.28em;color:var(--br); }
+    .arc-item-date { font-family:var(--FU);font-size:.48rem;font-weight:300;letter-spacing:.15em;color:var(--muted); }
+    .arc-item-name { font-family:var(--FJ);font-size:.95rem;font-weight:300;color:var(--dark);line-height:1.6; }
+    .arc-item-desc { font-size:.78rem;color:var(--muted);line-height:2;flex:1; }
+    .arc-photo { width:100%;aspect-ratio:16/9;background:var(--w1);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--FU);font-size:.46rem;letter-spacing:.15em;color:rgba(28,26,21,.2); }
+    .arc-photo img { width:100%;height:100%;object-fit:cover;display:block; }
 
-    #access-detail { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
-    .acc-col { padding: 6vh 7vw; border-right: 1px solid var(--line); }
-    .acc-col:last-child { border-right: none; }
-    .acc-sec-tag { font-family: var(--FU); font-size: .58rem; font-weight: 300; letter-spacing: .28em; color: var(--muted); display: flex; align-items: center; gap: .75rem; margin-bottom: 1.5rem; }
-    .acc-sec-tag::before { content: ''; display: block; width: 18px; height: 1px; background: var(--muted); }
-    .adl dt { font-family: var(--FU); font-size: .56rem; font-weight: 300; letter-spacing: .28em; color: var(--br); margin-top: 1.8rem; margin-bottom: .45rem; }
-    .adl dt:first-child { margin-top: 0; }
-    .adl dd { font-size: .84rem; font-weight: 300; color: var(--muted); line-height: 1.95; }
-    .adl dd strong { color: var(--dark); font-weight: 300; }
-    .hg { display: grid; grid-template-columns: auto 1fr; gap: .2rem 1.2rem; font-size: .82rem; margin-top: .35rem; }
-    .hg .d { color: rgba(28,26,21,.3); font-size: .76rem; }
-    .acc-note { margin-top: 1.5rem; font-size: .7rem; font-weight: 300; color: var(--muted); line-height: 1.9; letter-spacing: .03em; }
-    .acc-contact-link { color: var(--br); border-bottom: 1px solid rgba(107,92,72,.3); padding-bottom: .1rem; }
+    #archive-note { background:var(--dark);padding:6vh 7vw; }
+    .anote-inner { max-width:540px; }
+    .anote-tag { font-family:var(--FU);font-size:.56rem;font-weight:300;letter-spacing:.26em;color:var(--br2);display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem; }
+    .anote-tag::before { content:'';display:block;width:16px;height:1px;background:var(--br2); }
+    .anote-h { font-family:var(--FB);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:300;color:#ffffff;margin-bottom:.8rem; }
+    .anote-body { font-family:var(--FJ);font-size:.8rem;font-weight:200;color:rgba(255,255,255,.45);line-height:2.2;margin-bottom:1.8rem; }
+    .anote-link { display:inline-flex;align-items:center;gap:.4rem;font-family:var(--FU);font-size:.56rem;font-weight:300;letter-spacing:.16em;color:var(--br2);border-bottom:1px solid rgba(149,122,94,.3);padding-bottom:.2rem;transition:color .2s; }
+    .anote-link:hover { color:#ffffff; }
 
-
-    footer { background: var(--dark); border-top: 1px solid rgba(243,240,235,.05); padding: 2.5rem 7vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
-    .f-logo { font-family: var(--FB); font-size: 1rem; font-weight: 300; letter-spacing: .28em; color: var(--w0); }
-    .f-logo i { font-style: italic; color: var(--br2); }
-    .f-sub { font-family: var(--FU); font-size: .53rem; font-weight: 300; letter-spacing: .22em; color: rgba(243,240,235,.2); margin-top: .3rem; }
-    .f-nav { display: flex; gap: 2rem; }
-    .f-nav a { font-family: var(--FU); font-size: .6rem; font-weight: 300; letter-spacing: .18em; color: rgba(243,240,235,.3); transition: color .2s; }
-    .f-nav a:hover { color: var(--w0); }
-    .f-copy { font-family: var(--FU); font-size: .58rem; font-weight: 300; letter-spacing: .06em; color: rgba(243,240,235,.15); }
-    .f-nav-ico { display: inline-flex; align-items: center; }
-    .f-nav-ico svg { width: 13px; height: 13px; overflow: visible; }
+    footer { background:var(--dark);border-top:1px solid rgba(243,240,235,.05);padding:2.5rem 7vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem; }
+    .f-logo { font-family:var(--FB);font-size:1rem;font-weight:300;letter-spacing:.28em;color:#ffffff; }
+    .f-logo i { font-style:italic;color:var(--br2); }
+    .f-sub { font-family:var(--FU);font-size:.53rem;font-weight:300;letter-spacing:.22em;color:rgba(243,240,235,.2);margin-top:.3rem; }
+    .f-nav { display:flex;gap:2rem; }
+    .f-nav a { font-family:var(--FU);font-size:.6rem;font-weight:300;letter-spacing:.18em;color:rgba(243,240,235,.3);transition:color .2s; }
+    .f-nav a:hover { color:#ffffff; }
+    .f-copy { font-family:var(--FU);font-size:.58rem;font-weight:300;letter-spacing:.06em;color:rgba(243,240,235,.15); }
+    .f-nav-ico { display:inline-flex;align-items:center; }
+    .f-nav-ico svg { width:13px;height:13px;overflow:visible; }
 
     @media (max-width: 900px) {
       .rsb { display: none; }
       .rsb-hbg { display: flex; }
-      #access-detail { grid-template-columns: 1fr; }
-      .acc-col { border-right: none; border-bottom: 1px solid var(--line); }
-      .map-wrap { height: 40vh; }
+      .arc-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; align-items: flex-start; }
     }
     .site-sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--SB); z-index: 650; background: var(--w1); border-right: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; padding-top: 2rem; padding-bottom: 0; transition: opacity .35s ease; }
@@ -146,13 +158,12 @@
     @media (max-width: 600px) {
       body { word-break: auto-phrase; overflow-wrap: anywhere; }
       .page-hero { padding: 6vh 5vw 7vh; }
-      .acc-col { padding: 5vh 5vw; }
-      .map-wrap { height: 45vh; }
-      .ph-h1 { font-size: clamp(3rem, 12vw, 6rem); }
+      #archive { padding: 6vh 5vw; }
+      .arc-grid { grid-template-columns: 1fr; }
       .ph-sub { font-size: .9rem; letter-spacing: .1em; }
-      .adl dd { font-size: .92rem; line-height: 2; }
-      .hg { font-size: .9rem; }
-      .acc-note { font-size: .82rem; line-height: 2; }
+      .arc-item-name { font-size: 1rem; }
+      .arc-item-desc { font-size: .88rem; line-height: 2.1; }
+      .anote-body { font-size: .9rem; line-height: 2.2; }
       .nav-item a { font-size: 2rem; padding: .5rem 0; }
       .nav-left { padding: 3.5rem 1.5rem 2rem; }
       .nav-right-inner { padding: 2rem .8rem; gap: 1rem; }
@@ -182,11 +193,11 @@
   </button>
   <div class="nav-left">
     <ul class="nav-items">
-      <li class="nav-item"><a href="index5.html">Top<span class="nav-jp">トップ</span></a></li>
-      <li class="nav-item"><a href="concept5.html">Concept<span class="nav-jp">コンセプト</span></a></li>
-      <li class="nav-item"><a href="about5.html">About<span class="nav-jp">お店について</span></a></li>
-      <li class="nav-item"><a href="menu5.html">Menu<span class="nav-jp">メニュー</span></a></li>
-      <li class="nav-item"><a href="events5.html">Schedule<span class="nav-jp">営業スケジュール</span></a></li>
+      <li class="nav-item"><a href="index.html">Top<span class="nav-jp">トップ</span></a></li>
+      <li class="nav-item"><a href="concept.html">Concept<span class="nav-jp">コンセプト</span></a></li>
+      <li class="nav-item"><a href="about.html">About<span class="nav-jp">お店について</span></a></li>
+      <li class="nav-item"><a href="menu.html">Menu<span class="nav-jp">メニュー</span></a></li>
+      <li class="nav-item"><a href="events.html">Schedule<span class="nav-jp">営業スケジュール</span></a></li>
     </ul>
   </div>
   <div class="nav-right">
@@ -202,54 +213,68 @@
 </div>
 
 <div class="page-hero">
-  <div class="ph-over reveal">OWL 4 U — ACCESS</div>
-  <h1 class="ph-h1 reveal">場所と、<br><em>時間。</em></h1>
-  <p class="ph-sub reveal">江東区森下 — Koto-ku, Tokyo</p>
+  <div class="ph-over reveal">OWL 4 U — EVENT ARCHIVE</div>
+  <h1 class="ph-h1 reveal">記録と、<br><em>記憶。</em></h1>
+  <p class="ph-sub reveal">Events that happened here.</p>
+  <a class="ph-back reveal" href="events.html">← Events に戻る</a>
 </div>
 
-<div class="map-wrap">
-  <iframe src="https://maps.google.com/maps?q=東京都江東区森下3丁目13番7号&output=embed&z=17&hl=ja" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="OWL 4 U アクセスマップ"></iframe>
-</div>
-
-<div id="access-detail">
-  <div class="acc-col reveal">
-    <div class="acc-sec-tag">LOCATION & HOURS</div>
-    <dl class="adl">
-      <dt>ADDRESS</dt>
-      <dd><strong>OWL 4 U</strong><br>東京都江東区森下3丁目13番7号<br>YAビル1階</dd>
-      <dt>HOURS</dt>
-      <dd>営業日・営業時間は不定期です（間借りカフェ）。<br>スケジュールページ、または各種 SNS にてご確認ください。</dd>
-      <dt>TRAIN</dt>
-      <dd>
-        都営新宿線・都営大江戸線<br>
-        <strong>森下駅</strong> A7出口 徒歩約3分<br>
-        <span style="font-size:.82em;opacity:.55;">A7出口を出て右方向へ、清澄通りを直進、信号をひとつ越えると到着</span>
-        <br><br>
-        東京メトロ半蔵門線・都営大江戸線<br>
-        <strong>清澄白河駅</strong> B2出口 徒歩約8分<br>
-        <span style="font-size:.82em;opacity:.55;">B2出口を出て清澄通りを森下方向へ直進、「森下3丁目」交差点を右折してすぐ</span>
-      </dd>
-    </dl>
-    <p class="acc-note">※ 営業日・時間は変動します。最新情報はスケジュールページまたは各種 SNS でご確認ください。</p>
+<div id="archive">
+  <div class="arc-head reveal">
+    <div class="arc-tag">ALL EVENTS</div>
+    <h2 class="arc-h">過去の<em>イベント一覧</em></h2>
   </div>
-  <div class="acc-col reveal d1">
-    <div class="acc-sec-tag">CONTACT & OTHER</div>
-    <dl class="adl">
-      <dt>CONTACT</dt>
-      <dd>
-        <a class="acc-contact-link" href="mailto:hello@owl4u.jp">hello@owl4u.jp</a><br>
-        Instagram DM: <a class="acc-contact-link" href="https://www.instagram.com/owl4u_tokyo" target="_blank" rel="noopener noreferrer">@owl4u_tokyo</a>
-      </dd>
-      <dt>PARKING</dt>
-      <dd>店舗専用駐車場なし。<br>近隣のコインパーキングをご利用ください。</dd>
-      <dt>RESERVATION</dt>
-      <dd>基本的に予約不要。<br>貸し切り・イベント利用はご相談ください。</dd>
-      <dt>PAYMENT</dt>
-      <dd>現金 / カード / QRコード決済<br><strong>各種対応</strong></dd>
-    </dl>
+  <div class="arc-filter reveal">
+    <div class="arc-ft active">ALL</div>
+    <div class="arc-ft">OPEN MIC</div>
+    <div class="arc-ft">WORKSHOP</div>
+    <div class="arc-ft">GATHERING</div>
+  </div>
+  <div class="arc-grid">
+    <div class="arc-item reveal">
+      <div class="arc-item-meta">
+        <div class="arc-item-type">OPEN</div>
+        <div class="arc-item-date">2025.06</div>
+      </div>
+      <div class="arc-item-name">オープン記念 — 無料ドリンクデー</div>
+      <p class="arc-item-desc">最初の一日。何もなかったこの場所に、初めて人が来てくれた夜のこと。</p>
+      <div class="arc-photo">PHOTO COMING SOON</div>
+    </div>
+    <div class="arc-item reveal d1">
+      <div class="arc-item-meta">
+        <div class="arc-item-type">GATHERING</div>
+        <div class="arc-item-date">2025.07</div>
+      </div>
+      <div class="arc-item-name">スタッフと話す夜</div>
+      <p class="arc-item-desc">スタッフが前に出て、来てくれた人たちと普通に話した夜。普通が、いちばん大事だった。</p>
+      <div class="arc-photo">PHOTO COMING SOON</div>
+    </div>
+    <div class="arc-item reveal">
+      <div class="arc-item-meta">
+        <div class="arc-item-type">WORKSHOP</div>
+        <div class="arc-item-date">2025.08</div>
+      </div>
+      <div class="arc-item-name">カクテルをつくる会</div>
+      <p class="arc-item-desc">みんなで一杯ずつつくって、飲んで、笑った夜。レシピより記憶に残る時間だった。</p>
+      <div class="arc-photo">PHOTO COMING SOON</div>
+    </div>
+    <div class="arc-item reveal d1" style="display:flex;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;background:var(--w1);">
+      <div>
+        <div style="font-family:var(--FU);font-size:.48rem;letter-spacing:.22em;color:rgba(28,26,21,.25);margin-bottom:.8rem;">COMING SOON</div>
+        <div style="font-family:var(--FB);font-size:1.2rem;font-weight:300;color:rgba(28,26,21,.2);">次のイベントを記録していきます</div>
+      </div>
+    </div>
   </div>
 </div>
 
+<div id="archive-note">
+  <div class="anote-inner reveal">
+    <div class="anote-tag">NOTE</div>
+    <h3 class="anote-h">もっと詳しく読みたい方へ</h3>
+    <p class="anote-body">各イベントのより詳しいレポート、舞台裏、スタッフの感想などは note でまとめています。気軽に読みに来てください。</p>
+    <a class="anote-link" href="https://note.com" target="_blank" rel="noopener noreferrer">note で読む →</a>
+  </div>
+</div>
 
 <script>
   const menuBtn = document.getElementById('menuBtn');
@@ -263,6 +288,9 @@
   document.getElementById('navCloseBtn').addEventListener('click', closeNav);
   const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }); }, { threshold: .08 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll('.arc-ft').forEach(ft => {
+    ft.onclick = () => { document.querySelectorAll('.arc-ft').forEach(f => f.classList.remove('active')); ft.classList.add('active'); };
+  });
 </script>
 </body>
 </html>
