@@ -134,6 +134,10 @@
       .staff-name { font-size: 1.5rem; }
       .staff-body { font-size: .9rem; line-height: 2.1; }
       .nav-item a { font-size: 2rem; padding: .5rem 0; }
+      .nav-left { padding: 3.5rem 1.5rem 2rem; }
+      .nav-right-inner { padding: 2rem .8rem; gap: 1rem; }
+      .nav-right-tagline { font-size: .85rem; letter-spacing: 0; }
+      .nav-right-sub { display: none; }
     }
     .site-sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--SB); z-index: 650; background: var(--w1); border-right: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; padding-top: 2rem; padding-bottom: 0; transition: opacity .35s ease; }
     .site-sidebar.open { opacity: 0; pointer-events: none; }
@@ -182,8 +186,7 @@
       .sidebar-brand { order: -1; writing-mode: horizontal-tb; font-size: .72rem; letter-spacing: .22em; color: var(--dark); font-style: italic; }
       .sidebar-sns { display: none; }
       .menu-btn { order: 1; margin: 0; padding: .8rem; }
-      .nav-overlay { grid-template-columns: 1fr; }
-      .nav-right { display: none; }
+      /* nav-right: keep 58%/42% split on mobile */
       .nav-left { padding: 5rem 2.5rem 3rem; }
       .nav-item a { font-size: 2.6rem; }
     }

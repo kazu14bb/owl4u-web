@@ -229,8 +229,7 @@
       .sidebar-brand { order: -1; writing-mode: horizontal-tb; font-size: .72rem; letter-spacing: .22em; color: var(--dark); font-style: italic; }
       .sidebar-sns { display: none; }
       .menu-btn { order: 1; margin: 0; padding: .8rem; }
-      .nav-overlay { grid-template-columns: 1fr; }
-      .nav-right { display: none; }
+      /* nav-right: keep 58%/42% split on mobile */
       .nav-left { padding: 5rem 2.5rem 3rem; }
       .nav-item a { font-size: 2.6rem; }
       body { margin-top: 56px; }
@@ -289,6 +288,10 @@
       .adl dd { font-size: .9rem; }
       /* Nav */
       .nav-item a { font-size: 2rem; padding: .5rem 0; }
+      .nav-left { padding: 3.5rem 1.5rem 2rem; }
+      .nav-right-inner { padding: 2rem .8rem; gap: 1rem; }
+      .nav-right-tagline { font-size: .85rem; letter-spacing: 0; }
+      .nav-right-sub { display: none; }
     }
   </style>
 </head>
